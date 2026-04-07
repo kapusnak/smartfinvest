@@ -3,6 +3,7 @@
 
 # WordPress site — local only, never commit
 wordpress-site/
+scripts/extract-wp-pages.py
 
 # dependencies & Next.js build output
 node_modules/
