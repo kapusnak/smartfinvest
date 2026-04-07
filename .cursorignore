@@ -1,0 +1,5 @@
+# Local WordPress install — not tracked; keep out of Cursor index
+wordpress-site/
+
+scripts/extract-wp-pages.py
+

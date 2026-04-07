@@ -1,9 +1,10 @@
-# macOS
-.DS_Store
-
-# WordPress site — local only, never commit
+# WordPress site — local only, never commit (both forms for tooling compatibility)
+wordpress-site
 wordpress-site/
 scripts/extract-wp-pages.py
+
+# macOS
+.DS_Store
 
 # dependencies & Next.js build output
 node_modules/

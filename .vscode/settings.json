@@ -1,0 +1,10 @@
+{
+  "git.showIgnored": false,
+  "explorer.excludeGitIgnore": true,
+  "files.watcherExclude": {
+    "**/wordpress-site/**": true
+  },
+  "search.exclude": {
+    "**/wordpress-site": true
+  }
+}
