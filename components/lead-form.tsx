@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm, Controller } from "react-hook-form"
+import { useForm, Controller, useWatch, type FieldErrors } from "react-hook-form"
 import { z } from "zod"
 import { Building2, Car, Check, Loader2, Lock, TrendingUp } from "lucide-react"
 import { toast } from "sonner"
@@ -23,7 +23,6 @@ import {
   carAmountToIndex,
   formatAmountKc,
   formatRangeLabelKc,
-  getSocialProofText,
   realEstateAmountToIndex,
   realEstateServices,
   snapToCarValue,
@@ -138,7 +137,7 @@ export function LeadForm() {
   const searchParams = useSearchParams()
   const modeQuery = searchParams.get("mode")
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
-  const [socialProofText, setSocialProofText] = useState(SOCIAL_PROOF_FALLBACK)
+  const socialProofText = SOCIAL_PROOF_FALLBACK
 
   const defaultValues: LeadFormValues = {
     assetMode: "nemovitosti",
@@ -154,13 +153,10 @@ export function LeadForm() {
     mode: "onSubmit",
   })
 
-  const assetMode = form.watch("assetMode")
-  const amountCzk = form.watch("amountCzk")
-  const vehicleAmountCzk = form.watch("vehicleAmountCzk")
-
-  useEffect(() => {
-    setSocialProofText(getSocialProofText())
-  }, [])
+  const assetMode = useWatch({ control: form.control, name: "assetMode" })
+  const amountCzk = useWatch({ control: form.control, name: "amountCzk" })
+  const vehicleAmountCzk = useWatch({ control: form.control, name: "vehicleAmountCzk" })
+  const serviceType = useWatch({ control: form.control, name: "serviceType" })
 
   useEffect(() => {
     const syncFromUrl = () => {
@@ -301,8 +297,24 @@ export function LeadForm() {
 
   const requiredStar = <span className="text-red-600">*</span>
 
+  const onInvalid = (errors: FieldErrors<LeadFormValues>) => {
+    const phoneErr = errors.phoneDigits?.message
+    const emailErr = errors.email?.message
+    if (typeof phoneErr === "string") {
+      toast.error("Telefonní číslo", { id: "lead-invalid-phone", description: phoneErr, duration: 6500 })
+    } else if (typeof emailErr === "string") {
+      toast.error("E-mail", { id: "lead-invalid-email", description: emailErr, duration: 6500 })
+    } else {
+      toast.error("Zkontrolujte formulář", {
+        id: "lead-invalid-generic",
+        description: "Některá povinná pole nejsou vyplněna správně.",
+        duration: 6500,
+      })
+    }
+  }
+
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="mx-auto w-full space-y-6">
+    <form onSubmit={form.handleSubmit(onSubmit, onInvalid)} className="mx-auto w-full space-y-6">
       <div className="space-y-2">
         <p className="text-body font-medium text-[var(--color-muted)]">Typ poptávky</p>
         <div className="grid grid-cols-2 gap-2 sm:gap-3">
@@ -359,12 +371,12 @@ export function LeadForm() {
                   key={service.value}
                   type="button"
                   role="radio"
-                  aria-checked={form.watch("serviceType") === service.value}
+                  aria-checked={serviceType === service.value}
                   onClick={() => form.setValue("serviceType", service.value)}
                   className={cn(
                     "min-w-0 flex-1 px-2 py-2.5 text-center text-xs font-medium leading-tight transition-all sm:min-w-[calc(50%-0.25rem)] sm:px-3 sm:text-sm lg:flex-1",
                     "rounded-xl border-2",
-                    form.watch("serviceType") === service.value
+                    serviceType === service.value
                       ? "border-[var(--color-primary)] bg-[var(--color-surface-cream)] text-[var(--color-primary)]"
                       : "border-transparent bg-[var(--color-surface-muted)] text-[var(--color-muted)] hover:border-[var(--color-primary)]/30",
                   )}
@@ -481,7 +493,7 @@ export function LeadForm() {
           <p className="text-center text-xs leading-snug text-[var(--color-muted)]">
             Odesláním souhlasíte se zpracováním osobních údajů dle{" "}
             <Link
-              href="/ochrana-osobnich-udaju-nemovitosti"
+              href="/ochrana-osobnich-udaju"
               className="italic text-[var(--color-primary)] underline-offset-2 hover:underline"
             >
               zásad ochrany osobních údajů
@@ -659,7 +671,7 @@ export function LeadForm() {
           <p className="text-center text-xs leading-snug text-[var(--color-muted)]">
             Odesláním souhlasíte se zpracováním osobních údajů dle{" "}
             <Link
-              href="/prohlaseni-o-ochrane-osobnich-udaju-vozidla"
+              href="/ochrana-osobnich-udaju"
               className="italic text-[var(--color-primary)] underline-offset-2 hover:underline"
             >
               zásad ochrany osobních údajů

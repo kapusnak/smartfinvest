@@ -5,7 +5,7 @@ import Link from "next/link"
 
 import { SectionRule } from "@/components/section-rule"
 
-const STORAGE_KEY = "docasnyvykup-cookie-consent"
+const STORAGE_KEY = "smartfinvest-cookie-consent"
 
 type CookieBannerProps = {
   /** Fires when the bar is shown or hidden (e.g. to offset the phone popup above it). */

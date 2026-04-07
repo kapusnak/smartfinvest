@@ -3,8 +3,8 @@ import { Phone } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-const DEFAULT_TEL_HREF = "tel:+420776075150"
-const DEFAULT_TEL_DISPLAY = "+420 776 075 150"
+const DEFAULT_TEL_HREF = "tel:+420776680720"
+const DEFAULT_TEL_DISPLAY = "+420 776 680 720"
 
 type Props = {
   children: ReactNode

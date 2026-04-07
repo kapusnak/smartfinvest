@@ -4,12 +4,14 @@ import { useEffect, useRef, useState } from "react"
 import { usePathname } from "next/navigation"
 import { Phone, X } from "lucide-react"
 
+import { toast } from "sonner"
+
 import { sendPopupPhone } from "@/lib/emailjs"
 import { PhoneDigitsInput } from "@/components/phone-digits-input"
 import { toFullPhone } from "@/lib/phone-420"
 import { cn } from "@/lib/utils"
 
-const POPUP_DISMISSED_KEY = "docasnyvykup-phone-popup-dismissed"
+const POPUP_DISMISSED_KEY = "smartfinvest-phone-popup-dismissed"
 const SHOW_DELAY_MS = 15_000
 /** Must match `slide-in-bottom` in globals.css */
 const SLIDE_IN_DURATION_MS = 450
@@ -29,20 +31,27 @@ export function PhonePopup() {
 
   useEffect(() => {
     let cancelled = false
-    try {
-      if (localStorage.getItem(POPUP_DISMISSED_KEY) === "1") {
-        setClosed(true)
-        return
+    let showTimer: ReturnType<typeof setTimeout> | undefined
+
+    const raf = requestAnimationFrame(() => {
+      if (cancelled) return
+      try {
+        if (localStorage.getItem(POPUP_DISMISSED_KEY) === "1") {
+          setClosed(true)
+          return
+        }
+      } catch {
+        /* storage unavailable — still allow popup */
       }
-    } catch {
-      /* storage unavailable — still allow popup */
-    }
-    const t = setTimeout(() => {
-      if (!cancelled) setVisible(true)
-    }, SHOW_DELAY_MS)
+      showTimer = setTimeout(() => {
+        if (!cancelled) setVisible(true)
+      }, SHOW_DELAY_MS)
+    })
+
     return () => {
       cancelled = true
-      clearTimeout(t)
+      cancelAnimationFrame(raf)
+      if (showTimer) clearTimeout(showTimer)
     }
   }, [])
 
@@ -89,7 +98,7 @@ export function PhonePopup() {
     const id = window.setInterval(runShake, SHAKE_INTERVAL_MS)
     return () => {
       window.clearInterval(id)
-      shakeTargetRef.current?.classList.remove("animate-shake")
+      el.classList.remove("animate-shake")
     }
   }, [visible, closed, entranceDone, engaged])
 
@@ -103,9 +112,10 @@ export function PhonePopup() {
     setEntranceDone(true)
   }
 
-  useEffect(() => {
-    if (digits.length > 0) setEngaged(true)
-  }, [digits])
+  function setDigitsFromInput(value: string) {
+    setDigits(value)
+    if (value.length > 0) setEngaged(true)
+  }
 
   function dismiss() {
     try {
@@ -122,15 +132,34 @@ export function PhonePopup() {
     const phone = toFullPhone(digits)
     if (!phone) {
       setStatus("error")
+      toast.error("Chybí platné telefonní číslo", {
+        id: "phone-popup-missing",
+        description: "Zadejte prosím 9 číslic českého mobilu nebo pevné linky (bez předvolby +420).",
+        duration: 6000,
+      })
       return
     }
     setStatus("sending")
     try {
       await sendPopupPhone(phone, pathname ?? "")
       setStatus("success")
+      toast.success("Děkujeme", {
+        id: "phone-popup-success",
+        description: "Brzy vás budeme kontaktovat.",
+        duration: 4000,
+      })
       setTimeout(() => dismiss(), 1500)
-    } catch {
+    } catch (e) {
       setStatus("error")
+      const hint = e instanceof Error ? e.message.trim() : ""
+      toast.error("Odeslání se nepovedlo", {
+        id: "phone-popup-error",
+        description:
+          hint.length > 0 && hint.length <= 200
+            ? hint
+            : "Zkuste to prosím znovu nebo zavolejte přímo na uvedené číslo.",
+        duration: 8000,
+      })
     }
   }
 
@@ -138,7 +167,7 @@ export function PhonePopup() {
 
   return (
     <>
-      {/* Below cookie bar (z-50), above page — same role as hnedpenize lead-popup backdrop */}
+      {/* Below cookie bar (z-50), above page */}
       <button
         type="button"
         aria-label="Zavřít nabídku"
@@ -149,9 +178,9 @@ export function PhonePopup() {
       <div
         className={cn(
           "fixed left-0 right-0 z-[52] w-full max-h-[33vh] rounded-t-2xl bg-[#f1b24a] shadow-2xl",
-          "bottom-[var(--docasnyvykup-popup-bottom-mob)]",
+          "bottom-[var(--smartfinvest-popup-bottom-mob)]",
           !entranceDone && "max-lg:animate-slide-in-bottom",
-          "lg:bottom-[var(--docasnyvykup-popup-bottom-lg)] lg:left-auto lg:right-6 lg:max-h-none lg:w-[380px] lg:rounded-2xl",
+          "lg:bottom-[var(--smartfinvest-popup-bottom-lg)] lg:left-auto lg:right-6 lg:max-h-none lg:w-[380px] lg:rounded-2xl",
         )}
         onAnimationEnd={handleSlideInEnd}
       >
@@ -189,7 +218,7 @@ export function PhonePopup() {
                 inputClassName="h-full text-[var(--color-foreground)] placeholder:text-[var(--color-muted-light)]"
                 prefixClassName="text-[var(--color-muted)]"
                 value={digits}
-                onChange={setDigits}
+                onChange={setDigitsFromInput}
                 required
               />
             </div>

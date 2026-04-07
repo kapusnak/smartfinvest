@@ -16,15 +16,15 @@ export function BottomChrome() {
   useEffect(() => {
     const root = document.documentElement
     if (cookieBarOpen) {
-      root.style.setProperty("--docasnyvykup-popup-bottom-mob", "11rem")
-      root.style.setProperty("--docasnyvykup-popup-bottom-lg", "6rem")
+      root.style.setProperty("--smartfinvest-popup-bottom-mob", "11rem")
+      root.style.setProperty("--smartfinvest-popup-bottom-lg", "6rem")
     } else {
-      root.style.setProperty("--docasnyvykup-popup-bottom-mob", "0px")
-      root.style.setProperty("--docasnyvykup-popup-bottom-lg", "1.5rem")
+      root.style.setProperty("--smartfinvest-popup-bottom-mob", "0px")
+      root.style.setProperty("--smartfinvest-popup-bottom-lg", "1.5rem")
     }
     return () => {
-      root.style.setProperty("--docasnyvykup-popup-bottom-mob", "0px")
-      root.style.setProperty("--docasnyvykup-popup-bottom-lg", "1.5rem")
+      root.style.setProperty("--smartfinvest-popup-bottom-mob", "0px")
+      root.style.setProperty("--smartfinvest-popup-bottom-lg", "1.5rem")
     }
   }, [cookieBarOpen])
 

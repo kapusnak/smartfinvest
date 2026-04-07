@@ -83,15 +83,5 @@ export const realEstateServices = [
 
 export type RealEstateServiceValue = (typeof realEstateServices)[number]["value"]
 
-function randomSocialProofAmount(min: number, max: number): string {
-  const value = min + Math.random() * (max - min)
-  return value.toFixed(1).replace(/\.0$/, "")
-}
-
-export function getSocialProofText(): string {
-  const amount = randomSocialProofAmount(2.1, 23)
-  return `Za posledních 30 dní vyplaceno již ${amount} mil. Kč. Průměrná doba vyřízení: 24h.`
-}
-
 export const SOCIAL_PROOF_FALLBACK =
-  "Za posledních 30 dní vyplaceno již 3.9 mil. Kč. Průměrná doba vyřízení: 24h."
+  "Klientům pomáháme s financováním a refinancováním — ozveme se vám obvykle do 24 hodin."
