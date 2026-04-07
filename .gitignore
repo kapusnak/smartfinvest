@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# WordPress — credentials and dumps (never commit)
+wordpress-site/wp-config.php
+wordpress-site/*.sql
+wordpress-site/.htcnyopa.appconfig.php
+
+# WordPress — generated / local media
+wordpress-site/wp-content/uploads/
+wordpress-site/wp-content/cache/
+wordpress-site/wp-content/upgrade/
+wordpress-site/wp-content/upgrade-temp-backup/
