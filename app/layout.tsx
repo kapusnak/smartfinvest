@@ -3,6 +3,7 @@ import { Cardo, Inter } from "next/font/google"
 
 import { AppToaster } from "@/components/app-toaster"
 import { BottomChrome } from "@/components/bottom-chrome"
+import { getSiteUrlObject } from "@/lib/site-url"
 
 import "./globals.css"
 
@@ -23,10 +24,8 @@ const siteTitle = "Smart Finvest s.r.o. | Refinancování, pohledávky, financov
 const siteDescription =
   "Refinancování nemovitostí, řešení pohledávek a financování na míru. Smart Finvest s.r.o., Zlín. Nezávazná poptávka online."
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://smartfinvest.cz"
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: getSiteUrlObject(),
   title: {
     default: siteTitle,
     template: "%s | Smart Finvest",
