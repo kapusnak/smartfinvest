@@ -1,13 +1,23 @@
 # macOS
 .DS_Store
 
-# WordPress — credentials and dumps (never commit)
-wordpress-site/wp-config.php
-wordpress-site/*.sql
-wordpress-site/.htcnyopa.appconfig.php
+# WordPress site — local only, never commit
+wordpress-site/
 
-# WordPress — generated / local media
-wordpress-site/wp-content/uploads/
-wordpress-site/wp-content/cache/
-wordpress-site/wp-content/upgrade/
-wordpress-site/wp-content/upgrade-temp-backup/
+# dependencies & Next.js build output
+node_modules/
+.next/
+out/
+
+# environment
+.env
+.env*.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vercel
+.vercel

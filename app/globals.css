@@ -1,0 +1,96 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  /* Smart Finvest — modrá z WP formuláře (#066aab), neutrální pozadí */
+  --color-background: #f7f8fa;
+  --color-foreground: #111111;
+  --color-muted: #5c6470;
+  --color-muted-light: #8b939e;
+  --color-card: #ffffff;
+  --color-primary: #066aab;
+  --color-primary-hover: #055a91;
+  --color-surface-cream: #eef4f9;
+  --color-surface-vozidla: #f1f5f9;
+  --color-surface-muted: #eceff3;
+  --color-accent-warm: #e8f1f8;
+  --color-accent-teal: #066aab;
+  --color-footer: #0a3d5c;
+  --color-cta: #f1b24a;
+  --color-cta-hover: #e5a842;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-cardo), ui-serif, Georgia, serif;
+  --radius-lg: 1rem;
+  --radius-xl: 1rem;
+  --breakpoint-content: 72rem;
+}
+
+@layer base {
+  :root {
+    --header-scroll-offset: calc(0.75rem + 44px + 0.75rem + 1px);
+    --smartfinvest-popup-bottom-mob: 0px;
+    --smartfinvest-popup-bottom-lg: 1.5rem;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-scroll-offset);
+  }
+  body {
+    @apply bg-[var(--color-background)] text-[var(--color-foreground)] antialiased text-sm leading-snug md:text-base;
+  }
+
+  @media (max-width: 1023px) {
+    input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+    textarea,
+    select {
+      font-size: max(1rem, 16px);
+    }
+  }
+}
+
+@layer components {
+  .text-body {
+    @apply text-sm leading-snug md:text-base;
+  }
+  .text-body-muted {
+    @apply text-sm leading-snug text-[var(--color-muted)] md:text-base;
+  }
+  .text-body-foreground {
+    @apply text-sm leading-snug text-[var(--color-foreground)] md:text-base;
+  }
+  .text-body-inverse {
+    @apply text-sm leading-snug text-white/90 md:text-base;
+  }
+}
+
+@keyframes slide-in-bottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-slide-in-bottom {
+  animation: slide-in-bottom 0.45s ease-out both;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
