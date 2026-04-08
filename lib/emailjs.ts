@@ -24,6 +24,19 @@ const CALLBACK_ONLY_SERVICE = "Není relevantní (Callback)"
 const CALLBACK_ONLY_AMOUNT = "--- Pouze požadavek na zavolání ---"
 const PLACEHOLDER = "---"
 
+/**
+ * Value for EmailJS `{{source}}` — public site URL only (e.g. `https://smartfinvest.cz`).
+ * The template should use the “Zdroj:” label; do not prefix here. Strips a mistaken `Odesláno z:` from env.
+ */
+function leadEmailSourceUrl(): string {
+  const origin =
+    typeof window !== "undefined" && window.location?.origin
+      ? window.location.origin
+      : (process.env.NEXT_PUBLIC_SITE_URL ?? "").trim().replace(/\/$/, "")
+  const cleaned = (origin || "—").replace(/^Odesláno z:\s*/i, "").trim()
+  return cleaned || "—"
+}
+
 function formatEmailJsError(err: unknown): string {
   if (err && typeof err === "object") {
     const o = err as Record<string, unknown>
@@ -51,7 +64,7 @@ export async function sendLead(params: LeadParams): Promise<void> {
   const isCallbackOnly = params.source === "cta" || params.source === "popup"
   const assetTypeValue = isCallbackOnly ? PLACEHOLDER : (params.assetType ?? "")
   const templateParams = {
-    source: params.source,
+    source: leadEmailSourceUrl(),
     phone: params.phone,
     email: params.email ?? "",
     name: isCallbackOnly ? PLACEHOLDER : (params.name ?? ""),
