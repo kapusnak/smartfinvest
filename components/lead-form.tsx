@@ -11,7 +11,7 @@ import { toast } from "sonner"
 
 import { Slider } from "@/components/ui/slider"
 import { SliderTouchLock } from "@/components/slider-touch-lock"
-import { sendLead } from "@/lib/emailjs"
+import { sendLead } from "@/lib/send-lead"
 import {
   CAR_AMOUNT_VALUES,
   CAR_RANGE,

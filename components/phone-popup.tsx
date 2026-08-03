@@ -6,7 +6,7 @@ import { Phone, X } from "lucide-react"
 
 import { toast } from "sonner"
 
-import { sendPopupPhone } from "@/lib/emailjs"
+import { sendPopupPhone } from "@/lib/send-lead"
 import { PhoneDigitsInput } from "@/components/phone-digits-input"
 import { toFullPhone } from "@/lib/phone-420"
 import { cn } from "@/lib/utils"

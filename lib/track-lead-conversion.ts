@@ -7,7 +7,7 @@ export const GA_EVENT_FORMULAR = "vyplneny_formular"
 /** Phone-only: popup. */
 export const GA_EVENT_TELEFON = "telefonni_cislo"
 
-/** Matches `LeadParams["source"]` in lib/emailjs.ts — kept local to avoid circular imports. */
+/** Matches `LeadParams["source"]` in lib/send-lead.ts — kept local to avoid circular imports. */
 export type LeadSource = "calculator" | "popup" | "cta"
 
 /**
