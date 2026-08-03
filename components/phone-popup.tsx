@@ -207,7 +207,7 @@ export function PhonePopup() {
             onFocusCapture={markEngaged}
             className="mt-3 flex flex-col gap-2.5 lg:gap-3"
           >
-            <div className="relative flex h-10 w-full items-center rounded-lg bg-white focus-within:ring-2 focus-within:ring-[var(--color-primary)] lg:h-12">
+            <div className="relative flex h-10 w-full items-center rounded-lg border border-[var(--color-primary)] bg-white focus-within:ring-2 focus-within:ring-[var(--color-primary)]/40 lg:h-12">
               <Phone
                 className="pointer-events-none absolute left-3 top-1/2 z-[1] h-4 w-4 -translate-y-1/2 text-[var(--color-muted)]"
                 aria-hidden
