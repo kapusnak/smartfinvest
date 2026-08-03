@@ -4,7 +4,6 @@ import { Suspense } from "react"
 
 import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
-import { Header } from "@/components/header"
 import { LeadForm } from "@/components/lead-form"
 
 const services = [
@@ -47,7 +46,6 @@ const services = [
 export default function HomePage() {
   return (
     <>
-      <Header />
       <main>
         <section
           className="relative flex min-h-[min(72svh,560px)] items-center justify-center md:min-h-[min(80svh,720px)]"

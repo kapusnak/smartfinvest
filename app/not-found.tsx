@@ -2,12 +2,10 @@ import Link from "next/link"
 
 import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
-import { Header } from "@/components/header"
 
 export default function NotFound() {
   return (
     <>
-      <Header />
       <main className="min-h-[60vh] bg-[var(--color-background)]">
         <Container className="py-20 text-center">
           <p className="text-sm font-medium uppercase tracking-wider text-[var(--color-primary)]">404</p>

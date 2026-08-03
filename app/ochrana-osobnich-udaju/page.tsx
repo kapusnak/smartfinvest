@@ -3,7 +3,6 @@ import Link from "next/link"
 
 import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
-import { Header } from "@/components/header"
 
 export const metadata: Metadata = {
   title: "Ochrana osobních údajů",
@@ -14,10 +13,14 @@ export const metadata: Metadata = {
 export default function OchranaOsobnichUdajuPage() {
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-[var(--color-background)]">
         <section className="bg-[var(--color-primary)] pb-12 pt-10 md:pb-16 md:pt-14">
           <Container>
+            <p className="mb-4 text-center">
+              <Link href="/" className="text-sm text-white/85 underline-offset-2 hover:text-white hover:underline">
+                Zpět na hlavní stránku
+              </Link>
+            </p>
             <h1 className="text-center font-[family-name:var(--font-instrument)] text-3xl font-semibold leading-tight text-white md:text-4xl">
               Ochrana osobních údajů
             </h1>
