@@ -15,7 +15,7 @@ export function Footer() {
   return (
     <footer id="kontakty" className="bg-[var(--color-footer)] text-white">
       <Container className="py-10 lg:py-12">
-        <h2 className="mb-6 font-[family-name:var(--font-cardo)] text-xl font-semibold leading-tight tracking-tight text-white md:text-2xl lg:mb-8">
+        <h2 className="mb-6 font-[family-name:var(--font-instrument)] text-xl font-semibold leading-tight tracking-tight text-white md:text-2xl lg:mb-8">
           Kontakty
         </h2>
         <div className="grid grid-cols-1 gap-6 min-[480px]:grid-cols-2 min-[480px]:gap-8 lg:gap-10 lg:items-start">
@@ -23,6 +23,10 @@ export function Footer() {
             <p className="text-sm font-semibold text-white">Smart Finvest s.r.o.</p>
             <p className={bodySm}>
               <span className={muted}>Telefon: </span>
+              <a href="tel:+420777400256" className={telLink}>
+                +420 777 400 256
+              </a>
+              <span className={muted}> · </span>
               <a href="tel:+420776680720" className={telLink}>
                 +420 776 680 720
               </a>

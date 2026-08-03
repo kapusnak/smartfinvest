@@ -8,10 +8,10 @@ export default function NotFound() {
   return (
     <>
       <Header />
-      <main className="min-h-[60vh] bg-[var(--color-background)] pt-[4.5rem] md:pt-20">
+      <main className="min-h-[60vh] bg-[var(--color-background)]">
         <Container className="py-20 text-center">
           <p className="text-sm font-medium uppercase tracking-wider text-[var(--color-primary)]">404</p>
-          <h1 className="mt-2 font-[family-name:var(--font-cardo)] text-3xl font-bold leading-tight text-[var(--color-foreground)]">
+          <h1 className="mt-2 font-[family-name:var(--font-instrument)] text-3xl font-semibold leading-tight text-[var(--color-foreground)]">
             Stránka nenalezena
           </h1>
           <p className="mx-auto mt-3 max-w-md text-body-muted">

@@ -177,7 +177,7 @@ export function PhonePopup() {
 
       <div
         className={cn(
-          "fixed left-0 right-0 z-[52] w-full max-h-[33vh] rounded-t-2xl bg-[#f1b24a] shadow-2xl",
+          "fixed left-0 right-0 z-[52] w-full max-h-[33vh] rounded-t-2xl border border-[var(--color-primary)]/20 bg-white shadow-2xl",
           "bottom-[var(--smartfinvest-popup-bottom-mob)]",
           !entranceDone && "max-lg:animate-slide-in-bottom",
           "lg:bottom-[var(--smartfinvest-popup-bottom-lg)] lg:left-auto lg:right-6 lg:max-h-none lg:w-[380px] lg:rounded-2xl",
@@ -194,11 +194,11 @@ export function PhonePopup() {
         </button>
 
         <div ref={shakeTargetRef} className="p-4 pb-6 lg:p-6">
-          <h3 className="pr-10 text-lg font-bold leading-snug text-[var(--color-foreground)] lg:text-2xl">
-            Potřebujete poradit?
+          <h3 className="pr-10 font-[family-name:var(--font-instrument)] text-lg font-semibold leading-snug text-[var(--color-foreground)] lg:text-2xl">
+            Nejste si jisti dalším krokem?
           </h3>
           <p className="mt-1.5 text-body-foreground">
-            Nechte nám telefon, ozveme se vám a nezávazně vše prokonzultujeme.
+            Nechte nám na sebe kontakt, zavoláme Vám a navrhneme řešení na míru.
           </p>
 
           <form

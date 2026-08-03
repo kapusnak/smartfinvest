@@ -15,10 +15,10 @@ export default function OchranaOsobnichUdajuPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[var(--color-background)] pt-[4.5rem] md:pt-20">
+      <main className="min-h-screen bg-[var(--color-background)]">
         <section className="bg-[var(--color-primary)] pb-12 pt-10 md:pb-16 md:pt-14">
           <Container>
-            <h1 className="text-center font-[family-name:var(--font-cardo)] text-3xl font-bold leading-tight text-white md:text-4xl">
+            <h1 className="text-center font-[family-name:var(--font-instrument)] text-3xl font-semibold leading-tight text-white md:text-4xl">
               Ochrana osobních údajů
             </h1>
             <p className="mx-auto mt-3 max-w-2xl text-center text-body-inverse">

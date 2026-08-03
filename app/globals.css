@@ -2,24 +2,28 @@
 @import "tw-animate-css";
 
 @theme {
-  /* Smart Finvest — modrá z WP formuláře (#066aab), neutrální pozadí */
-  --color-background: #f7f8fa;
-  --color-foreground: #111111;
+  /* Smart Finvest — teal z WP Global Styles (#299583) */
+  --color-background: #ffffff;
+  --color-foreground: #000000;
   --color-muted: #5c6470;
-  --color-muted-light: #8b939e;
+  --color-muted-light: #a4a4a4;
   --color-card: #ffffff;
-  --color-primary: #066aab;
-  --color-primary-hover: #055a91;
-  --color-surface-cream: #eef4f9;
+  --color-primary: #299583;
+  --color-primary-hover: #217769;
+  --color-header-tint: rgba(41, 166, 143, 0.16);
+  --color-section-tint: rgba(23, 146, 124, 0.2);
+  --color-contrast-2: #353535;
+  --color-contrast-3: #a4a4a4;
+  --color-surface-cream: #e8f3f1;
   --color-surface-vozidla: #f1f5f9;
   --color-surface-muted: #eceff3;
-  --color-accent-warm: #e8f1f8;
-  --color-accent-teal: #066aab;
-  --color-footer: #0a3d5c;
-  --color-cta: #f1b24a;
-  --color-cta-hover: #e5a842;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-cardo), ui-serif, Georgia, serif;
+  --color-accent-warm: #e8f3f1;
+  --color-accent-teal: #299583;
+  --color-footer: #0e211c;
+  --color-cta: #299583;
+  --color-cta-hover: #217769;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
   --radius-lg: 1rem;
   --radius-xl: 1rem;
   --breakpoint-content: 72rem;

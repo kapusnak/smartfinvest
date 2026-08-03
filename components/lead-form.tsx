@@ -33,10 +33,10 @@ import { toFullPhone } from "@/lib/phone-420"
 import { cn } from "@/lib/utils"
 
 const inputClass =
-  "h-12 w-full rounded-xl border border-[#cfcabe] bg-white px-4 text-base text-[var(--color-foreground)] shadow-sm outline-none transition-[box-shadow] focus:ring-2 focus:ring-[var(--color-primary)]"
+  "h-12 w-full rounded-xl border border-black/20 bg-white px-4 text-base text-[var(--color-foreground)] shadow-sm outline-none transition-[box-shadow] focus:ring-2 focus:ring-[var(--color-primary)]"
 
 const phoneInputWrapperClass =
-  "h-12 w-full rounded-xl border border-[#cfcabe] bg-white px-4 text-base text-[var(--color-foreground)] shadow-sm outline-none transition-[box-shadow] focus-within:ring-2 focus-within:ring-[var(--color-primary)]"
+  "h-12 w-full rounded-xl border border-black/20 bg-white px-4 text-base text-[var(--color-foreground)] shadow-sm outline-none transition-[box-shadow] focus-within:ring-2 focus-within:ring-[var(--color-primary)]"
 
 const serviceTypeEnum = z.enum(["zpetny-leasing", "zastava", "primy-vykup", "bez-zajisteni"])
 
@@ -326,7 +326,7 @@ export function LeadForm() {
               "flex min-h-[52px] items-center justify-center gap-2 rounded-xl border-2 px-3 py-3 text-sm font-semibold transition-all active:scale-[0.98] sm:text-base",
               assetMode === "nemovitosti"
                 ? "border-[var(--color-primary)] bg-[var(--color-surface-cream)] text-[var(--color-primary)]"
-                : "border-[#cfcabe] bg-white text-[var(--color-muted)] hover:border-[var(--color-primary)]/40",
+                : "border-black/20 bg-white text-[var(--color-muted)] hover:border-[var(--color-primary)]/40",
             )}
           >
             <Building2 className="h-4 w-4 shrink-0" aria-hidden />
@@ -339,7 +339,7 @@ export function LeadForm() {
               "flex min-h-[52px] items-center justify-center gap-2 rounded-xl border-2 px-3 py-3 text-sm font-semibold transition-all active:scale-[0.98] sm:text-base",
               assetMode === "vozidlo"
                 ? "border-[var(--color-primary)] bg-[var(--color-surface-cream)] text-[var(--color-primary)]"
-                : "border-[#cfcabe] bg-white text-[var(--color-muted)] hover:border-[var(--color-primary)]/40",
+                : "border-black/20 bg-white text-[var(--color-muted)] hover:border-[var(--color-primary)]/40",
             )}
           >
             <Car className="h-4 w-4 shrink-0" aria-hidden />
@@ -351,7 +351,7 @@ export function LeadForm() {
       {assetMode === "nemovitosti" ? (
         <>
           <div className="flex flex-wrap items-center gap-2">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-foreground)]/12 bg-[var(--color-cta)] px-3 py-1.5 shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-primary)]/25 bg-[var(--color-surface-cream)] px-3 py-1.5 shadow-sm">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-primary)]/45 opacity-75" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-primary)] ring-2 ring-white/70" />
@@ -505,7 +505,7 @@ export function LeadForm() {
       ) : (
         <div className="space-y-4 md:space-y-5">
           <div className="flex flex-wrap items-center gap-2">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-foreground)]/12 bg-[var(--color-cta)] px-3 py-1.5 shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--color-primary)]/25 bg-[var(--color-surface-cream)] px-3 py-1.5 shadow-sm">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-primary)]/45 opacity-75" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[var(--color-primary)] ring-2 ring-white/70" />
@@ -690,7 +690,7 @@ export function LeadForm() {
           "flex h-12 min-h-[48px] w-full items-center justify-center gap-2 rounded-xl text-base font-semibold transition-all disabled:pointer-events-none",
           status === "success"
             ? "border-2 border-[var(--color-primary)]/20 bg-[var(--color-primary)]/[0.07] text-[var(--color-primary)] shadow-none"
-            : "bg-[var(--color-cta)] text-[var(--color-foreground)] hover:bg-[var(--color-cta-hover)] disabled:opacity-[0.65]",
+            : "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] disabled:opacity-[0.65]",
         )}
       >
         {status === "sending" ? (

@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Cardo, Inter } from "next/font/google"
+import { Instrument_Sans, Jost } from "next/font/google"
 
 import { AppToaster } from "@/components/app-toaster"
 import { BottomChrome } from "@/components/bottom-chrome"
@@ -7,16 +7,16 @@ import { getSiteUrlObject } from "@/lib/site-url"
 
 import "./globals.css"
 
-const inter = Inter({
+const jost = Jost({
   subsets: ["latin", "latin-ext"],
-  variable: "--font-inter",
+  variable: "--font-body",
   display: "swap",
 })
 
-const cardo = Cardo({
+const instrumentSans = Instrument_Sans({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "700"],
-  variable: "--font-cardo",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-instrument",
   display: "swap",
 })
 
@@ -42,11 +42,14 @@ export const metadata: Metadata = {
     title: siteTitle,
     description: siteDescription,
   },
+  icons: {
+    icon: "/images/logo-circle.png",
+  },
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="cs" className={`${inter.variable} ${cardo.variable}`}>
+    <html lang="cs" className={`${jost.variable} ${instrumentSans.variable}`}>
       <body className="min-h-screen font-sans">
         {children}
         <BottomChrome />
