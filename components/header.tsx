@@ -9,7 +9,7 @@ export function Header() {
   const isHome = pathname === "/"
 
   return (
-    <header className="sticky top-0 z-50 border-b border-black/5 bg-[var(--color-header-tint)] backdrop-blur-sm">
+    <header className="border-b border-black/5 bg-[var(--color-header-tint)]">
       <div className="mx-auto flex max-w-[72rem] items-center justify-between gap-4 px-4 py-3 sm:px-10 lg:px-16 xl:px-20 2xl:px-24">
         <Link href="/" className="flex min-h-[44px] min-w-0 shrink items-center gap-3">
           <Image

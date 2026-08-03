@@ -87,7 +87,7 @@ export default function HomePage() {
 
         <section
           id="sluzby"
-          className="scroll-mt-[var(--header-scroll-offset)] bg-white py-10 md:py-14"
+          className="bg-white py-10 md:py-14"
           aria-label="Služby"
         >
           <Container>
@@ -162,7 +162,7 @@ export default function HomePage() {
 
         <section
           id="formular"
-          className="scroll-mt-[var(--header-scroll-offset)] bg-[var(--color-section-tint)] py-12 md:py-16"
+          className="bg-[var(--color-section-tint)] py-12 md:py-16"
           aria-label="Formulář a kontakty"
         >
           <Container>

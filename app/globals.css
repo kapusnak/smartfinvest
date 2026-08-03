@@ -31,13 +31,11 @@
 
 @layer base {
   :root {
-    --header-scroll-offset: calc(0.75rem + 44px + 0.75rem + 1px);
     --smartfinvest-popup-bottom-mob: 0px;
     --smartfinvest-popup-bottom-lg: 1.5rem;
   }
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: var(--header-scroll-offset);
   }
   body {
     @apply bg-[var(--color-background)] text-[var(--color-foreground)] antialiased text-sm leading-snug md:text-base;
