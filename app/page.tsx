@@ -49,7 +49,7 @@ export default function HomePage() {
     <>
       <main>
         <section
-          className="relative flex min-h-[min(72svh,560px)] items-center justify-center md:min-h-[min(80svh,720px)]"
+          className="relative flex min-h-[min(50svh,392px)] items-center justify-center md:min-h-[min(56svh,504px)]"
           aria-label="Úvod"
         >
           <div className="absolute inset-0 overflow-hidden">
