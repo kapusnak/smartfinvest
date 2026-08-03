@@ -116,7 +116,6 @@ function buildNotifyHtml(fields: {
   phoneDisplay: string
   email: string
   propertyAddress: string
-  propertyType: string
   serviceType: string
   amount: string
   ip: string
@@ -165,10 +164,6 @@ function buildNotifyHtml(fields: {
           <td style="padding: 5px 0; text-align: right; font-weight: 500;">${escapeHtml(fields.propertyAddress)}</td>
         </tr>
         <tr>
-          <td style="padding: 5px 0;"><strong>Typ zajištění:</strong></td>
-          <td style="padding: 5px 0; text-align: right; font-weight: 500;">${escapeHtml(fields.propertyType)}</td>
-        </tr>
-        <tr>
           <td style="padding: 5px 0;"><strong>Požadovaná služba:</strong></td>
           <td style="padding: 5px 0; text-align: right; font-weight: 500;">${escapeHtml(fields.serviceType)}</td>
         </tr>
@@ -189,7 +184,6 @@ function buildNotifyHtml(fields: {
 /** Client confirmation HTML — footer uses this site's brand. */
 function buildClientHtml(fields: {
   name: string
-  propertyType: string
   serviceType: string
   amount: string
 }): string {
@@ -212,10 +206,6 @@ function buildClientHtml(fields: {
         <tr>
           <td style="padding: 5px 0; width: 50%;"><strong>Jméno:</strong></td>
           <td style="padding: 5px 0; text-align: right;">${escapeHtml(fields.name)}</td>
-        </tr>
-        <tr>
-          <td style="padding: 5px 0;"><strong>Typ zajištění:</strong></td>
-          <td style="padding: 5px 0; text-align: right;">${escapeHtml(fields.propertyType)}</td>
         </tr>
         <tr>
           <td style="padding: 5px 0;"><strong>Typ služby:</strong></td>
@@ -250,7 +240,6 @@ function buildClientHtml(fields: {
 
 export function buildLeadEmails(params: LeadPayload & { ip: string }): BuiltLeadEmails {
   const callback = isCallbackOnly(params.source)
-  const propertyType = callback ? PLACEHOLDER : (params.assetType ?? PLACEHOLDER)
   const propertyAddress = callback ? PLACEHOLDER : (params.propertyAddress?.trim() || PLACEHOLDER)
   const phoneTel = normalizePhoneForTel(params.phone)
   const phoneDisplay = formatPhoneDisplayForNotification(params.phone) || params.phone.trim()
@@ -280,7 +269,6 @@ export function buildLeadEmails(params: LeadPayload & { ip: string }): BuiltLead
     `Telefon: ${phoneDisplay}`,
     `E-mail: ${email || PLACEHOLDER}`,
     `Adresa nemovitosti: ${propertyAddress}`,
-    `Typ zajištění: ${propertyType}`,
     `Požadovaná služba: ${serviceType}`,
     `Částka: ${amount}`,
     `IP adresa: ${ip}`,
@@ -293,7 +281,6 @@ export function buildLeadEmails(params: LeadPayload & { ip: string }): BuiltLead
     phoneDisplay,
     email,
     propertyAddress,
-    propertyType,
     serviceType,
     amount,
     ip,
@@ -308,7 +295,6 @@ export function buildLeadEmails(params: LeadPayload & { ip: string }): BuiltLead
     "Potvrzujeme, že Vaše žádost byla úspěšně přijata. Brzy se s Vámi spojíme.",
     "",
     `Jméno: ${clientNameForBody}`,
-    `Typ zajištění: ${propertyType}`,
     `Typ služby: ${serviceType}`,
     `Požadovaná částka: ${amount}`,
     "",
@@ -323,7 +309,6 @@ export function buildLeadEmails(params: LeadPayload & { ip: string }): BuiltLead
 
   const clientHtml = buildClientHtml({
     name: clientNameForBody,
-    propertyType,
     serviceType,
     amount,
   })
