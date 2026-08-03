@@ -5,6 +5,7 @@ import { Suspense } from "react"
 import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
 import { LeadForm } from "@/components/lead-form"
+import { ServiceCard } from "@/components/service-card"
 
 const services = [
   {
@@ -85,74 +86,20 @@ export default function HomePage() {
 
         <section
           id="sluzby"
-          className="bg-white py-10 md:py-14"
+          className="bg-white py-12 md:py-16"
           aria-label="Služby"
         >
           <Container>
-            <div className="grid gap-8 md:grid-cols-3 md:gap-6 lg:gap-8">
+            <div className="grid items-start gap-10 md:grid-cols-3 md:gap-8 lg:gap-12">
               {services.map((item) => (
-                <div key={item.title} className="flex flex-col items-center text-center">
-                  <Image
-                    src={item.icon}
-                    alt=""
-                    width={72}
-                    height={72}
-                    className="h-[72px] w-[72px] object-contain"
-                  />
-                  <h2 className="mt-4 font-[family-name:var(--font-instrument)] text-[1.4rem] font-semibold text-[var(--color-contrast-2)]">
-                    {item.title}
-                  </h2>
-                  <p className="mt-2 text-body-foreground">{item.short}</p>
-                  <details className="mt-3 w-full group">
-                    <summary className="cursor-pointer list-none text-center italic text-[var(--color-foreground)] marker:content-none [&::-webkit-details-marker]:hidden">
-                      <span className="inline-flex items-center gap-1.5">
-                        <span className="text-xs not-italic" aria-hidden>
-                          ▶
-                        </span>
-                        Více informací
-                      </span>
-                    </summary>
-                    <div className="mt-4 space-y-4 text-left text-body-muted">
-                      <p>{item.details}</p>
-                      {item.partner && (
-                        <>
-                          <p>
-                            Partner:{" "}
-                            <a
-                              href={item.partner.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-[var(--color-primary)] underline-offset-2 hover:underline"
-                            >
-                              {item.partner.label}
-                            </a>
-                          </p>
-                          <div className="flex justify-center">
-                            <Image
-                              src={item.partner.logo}
-                              alt={item.partner.label}
-                              width={item.partner.width}
-                              height={80}
-                              className="h-auto object-contain"
-                              style={{ width: item.partner.width }}
-                            />
-                          </div>
-                        </>
-                      )}
-                      {!item.partner && (
-                        <div className="flex justify-center py-2">
-                          <Image
-                            src="/images/logo.png"
-                            alt="Smart Finvest s.r.o."
-                            width={168}
-                            height={112}
-                            className="h-auto w-[168px] rounded-[20px] object-contain"
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </details>
-                </div>
+                <ServiceCard
+                  key={item.title}
+                  icon={item.icon}
+                  title={item.title}
+                  short={item.short}
+                  details={item.details}
+                  partner={item.partner}
+                />
               ))}
             </div>
           </Container>

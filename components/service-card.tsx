@@ -1,0 +1,114 @@
+"use client"
+
+import { useEffect, useId, useRef, useState } from "react"
+import Image from "next/image"
+import { ChevronDown } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+
+type Partner = { href: string; label: string; logo: string; width: number }
+
+export function ServiceCard({
+  icon,
+  title,
+  short,
+  details,
+  partner,
+}: {
+  icon: string
+  title: string
+  short: string
+  details: string
+  partner: Partner | null
+}) {
+  const [open, setOpen] = useState(false)
+  const panelId = useId()
+  const contentRef = useRef<HTMLDivElement>(null)
+  const [contentHeight, setContentHeight] = useState(0)
+
+  useEffect(() => {
+    const el = contentRef.current
+    if (!el) return
+    const update = () => setContentHeight(el.scrollHeight)
+    update()
+    const observer = new ResizeObserver(update)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div className="flex flex-col items-center px-2 text-center sm:px-4">
+      <Image
+        src={icon}
+        alt=""
+        width={72}
+        height={72}
+        className="h-[72px] w-[72px] object-contain"
+      />
+
+      <h2 className="mt-5 font-[family-name:var(--font-instrument)] text-[1.4rem] font-semibold leading-snug text-[var(--color-contrast-2)]">
+        {title}
+      </h2>
+      <p className="mt-3 max-w-[18rem] text-body-foreground">{short}</p>
+
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={panelId}
+        className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-primary)] transition-colors hover:text-[var(--color-primary-hover)]"
+      >
+        {open ? "Skrýt" : "Více informací"}
+        <ChevronDown
+          className={cn(
+            "h-4 w-4 transition-transform duration-300 ease-out motion-reduce:transition-none",
+            open && "rotate-180",
+          )}
+          aria-hidden
+          strokeWidth={2.25}
+        />
+      </button>
+
+      <div
+        id={panelId}
+        role="region"
+        style={{ maxHeight: open ? contentHeight : 0 }}
+        className="w-full overflow-hidden transition-[max-height] duration-300 ease-out motion-reduce:transition-none"
+      >
+        <div ref={contentRef} className="space-y-4 pt-5 text-left text-body-muted">
+          <p>{details}</p>
+          {partner ? (
+            <div className="flex flex-col items-center gap-3 pt-1">
+              <a
+                href={partner.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-[var(--color-primary)] underline-offset-2 hover:underline"
+              >
+                Partner: {partner.label}
+              </a>
+              <Image
+                src={partner.logo}
+                alt={partner.label}
+                width={partner.width}
+                height={80}
+                className="h-auto object-contain"
+                style={{ width: partner.width }}
+              />
+            </div>
+          ) : (
+            <div className="flex justify-center py-1">
+              <Image
+                src="/images/logo.png"
+                alt="Smart Finvest s.r.o."
+                width={140}
+                height={93}
+                className="h-auto w-[140px] rounded-[16px] object-contain"
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
