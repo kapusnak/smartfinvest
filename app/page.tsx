@@ -158,21 +158,20 @@ export default function HomePage() {
                   <h2 className="font-[family-name:var(--font-instrument)] text-2xl font-semibold text-[var(--color-foreground)] md:text-[2.1rem]">
                     Kontaktujte nás
                   </h2>
-                  <p className="mt-2 text-body-muted">Ozvěte se nám — rádi najdeme řešení.</p>
 
-                  <div className="mt-6 flex items-center gap-4">
+                  <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
                     <Image
                       src="/images/logo-circle.png"
                       alt="Smart Finvest s.r.o. — Finance, investice, pohledávky"
-                      width={72}
-                      height={72}
-                      className="h-[72px] w-[72px] shrink-0 rounded-full object-cover ring-2 ring-[var(--color-primary)]/20"
+                      width={148}
+                      height={148}
+                      className="h-[148px] w-[148px] shrink-0 rounded-full object-cover"
                     />
                     <div>
-                      <p className="text-base font-semibold leading-snug text-[var(--color-foreground)] md:text-lg">
+                      <p className="text-lg font-semibold leading-snug text-[var(--color-foreground)] md:text-xl">
                         Smart Finvest s.r.o.
                       </p>
-                      <p className="mt-0.5 text-sm text-[var(--color-muted)]">IČ: 23627000</p>
+                      <p className="mt-1 text-sm text-[var(--color-muted)] md:text-base">IČ: 23627000</p>
                     </div>
                   </div>
 
@@ -241,16 +240,14 @@ export default function HomePage() {
                     href="https://wa.me/420777400256"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-6 flex items-center gap-3 rounded-2xl bg-[#25D366] px-4 py-3.5 text-white shadow-[0_10px_28px_-14px_rgba(37,211,102,0.65)] transition-[transform,background-color,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#1ebe57] hover:shadow-[0_16px_36px_-12px_rgba(37,211,102,0.7)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 motion-reduce:transition-none"
+                    className="mt-6 inline-flex max-w-full items-center gap-3 rounded-xl border border-[#25D366]/45 bg-transparent px-4 py-3 transition-colors hover:border-[#25D366] hover:bg-[#25D366]/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/40 focus-visible:ring-offset-2"
                   >
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/20">
-                      <WhatsAppIcon className="h-6 w-6" />
-                    </span>
+                    <WhatsAppIcon className="h-7 w-7 shrink-0 text-[#25D366]" />
                     <span className="min-w-0">
-                      <span className="block text-sm font-semibold leading-snug sm:text-base">
+                      <span className="block text-sm font-semibold leading-snug text-[var(--color-foreground)] sm:text-base">
                         Napište nám na WhatsApp
                       </span>
-                      <span className="mt-0.5 block text-xs leading-snug text-white/85 sm:text-sm">
+                      <span className="mt-0.5 block text-xs leading-snug text-[var(--color-muted)] sm:text-sm">
                         Rychlá zpráva — odpovíme co nejdříve
                       </span>
                     </span>
