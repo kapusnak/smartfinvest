@@ -38,7 +38,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-[var(--color-background)] text-[var(--color-foreground)] antialiased text-sm leading-snug md:text-base;
+    @apply bg-[var(--color-background)] text-[var(--color-foreground)] antialiased text-base leading-snug md:text-lg;
   }
 
   @media (max-width: 1023px) {
@@ -52,16 +52,16 @@
 
 @layer components {
   .text-body {
-    @apply text-sm leading-snug md:text-base;
+    @apply text-base leading-snug md:text-lg;
   }
   .text-body-muted {
-    @apply text-sm leading-snug text-[var(--color-muted)] md:text-base;
+    @apply text-base leading-snug text-[var(--color-muted)] md:text-lg;
   }
   .text-body-foreground {
-    @apply text-sm leading-snug text-[var(--color-foreground)] md:text-base;
+    @apply text-base leading-snug text-[var(--color-foreground)] md:text-lg;
   }
   .text-body-inverse {
-    @apply text-sm leading-snug text-white/90 md:text-base;
+    @apply text-base leading-snug text-white/90 md:text-lg;
   }
 }
 
