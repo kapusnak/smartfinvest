@@ -37,26 +37,26 @@ export function ServiceCard({
   }, [])
 
   return (
-    <div className="flex flex-col items-center px-2 text-center sm:px-4">
+    <div className="flex h-full flex-col rounded-2xl bg-white p-6 text-center shadow-[0_10px_36px_-16px_rgba(17,17,17,0.22)] ring-1 ring-black/[0.04] transition-shadow hover:shadow-[0_16px_44px_-16px_rgba(17,17,17,0.28)] sm:p-7">
       <Image
         src={icon}
         alt=""
         width={72}
         height={72}
-        className="h-[72px] w-[72px] object-contain"
+        className="mx-auto h-[72px] w-[72px] object-contain"
       />
 
-      <h2 className="mt-5 font-[family-name:var(--font-instrument)] text-[1.4rem] font-semibold leading-snug text-[var(--color-contrast-2)]">
+      <h2 className="mt-5 font-[family-name:var(--font-instrument)] text-[1.35rem] font-semibold leading-snug text-[var(--color-contrast-2)]">
         {title}
       </h2>
-      <p className="mt-3 max-w-[18rem] text-body-foreground">{short}</p>
+      <p className="mt-3 text-body-foreground">{short}</p>
 
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={panelId}
-        className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-primary)] transition-colors hover:text-[var(--color-primary-hover)]"
+        className="mt-5 inline-flex min-h-10 items-center justify-center gap-1.5 self-center text-sm font-medium text-[var(--color-primary)] transition-colors hover:text-[var(--color-primary-hover)]"
       >
         {open ? "Skrýt" : "Více informací"}
         <ChevronDown

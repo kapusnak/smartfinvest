@@ -86,11 +86,11 @@ export default function HomePage() {
 
         <section
           id="sluzby"
-          className="bg-white py-12 md:py-16"
+          className="bg-[var(--color-surface-cream)]/40 py-12 md:py-16"
           aria-label="Služby"
         >
           <Container>
-            <div className="grid items-start gap-10 md:grid-cols-3 md:gap-8 lg:gap-12">
+            <div className="grid items-stretch gap-6 md:grid-cols-3 md:gap-7 lg:gap-8">
               {services.map((item) => (
                 <ServiceCard
                   key={item.title}
