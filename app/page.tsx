@@ -75,7 +75,7 @@ export default function HomePage() {
               <div className="mt-6 flex justify-center">
                 <Link
                   href="/#formular"
-                  className="inline-flex min-h-[48px] items-center justify-center rounded-[25px] bg-[var(--color-primary)] px-8 text-sm font-semibold uppercase tracking-[0.2px] text-white transition-colors hover:bg-[var(--color-primary-hover)]"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-[25px] bg-[var(--color-cta)] px-8 text-sm font-semibold uppercase tracking-[0.2px] text-white transition-colors hover:bg-[var(--color-cta-hover)]"
                 >
                   Nezávazná konzultace zdarma
                 </Link>

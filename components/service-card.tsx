@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useId, useRef, useState } from "react"
+import { useEffect, useId, useRef, useState, type KeyboardEvent, type MouseEvent } from "react"
 import Image from "next/image"
 import { ChevronDown } from "lucide-react"
 
@@ -36,28 +36,51 @@ export function ServiceCard({
     return () => observer.disconnect()
   }, [])
 
+  const toggle = () => setOpen((v) => !v)
+
+  const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault()
+      toggle()
+    }
+  }
+
+  const stopCardToggle = (e: MouseEvent) => {
+    e.stopPropagation()
+  }
+
   return (
-    <div className="flex h-full flex-col rounded-2xl bg-white p-6 text-center shadow-[0_10px_36px_-16px_rgba(17,17,17,0.22)] ring-1 ring-black/[0.04] transition-shadow hover:shadow-[0_16px_44px_-16px_rgba(17,17,17,0.28)] sm:p-7">
-      <Image
-        src={icon}
-        alt=""
-        width={72}
-        height={72}
-        className="mx-auto h-[72px] w-[72px] object-contain"
-      />
+    <div
+      role="button"
+      tabIndex={0}
+      aria-expanded={open}
+      aria-controls={panelId}
+      onClick={toggle}
+      onKeyDown={onKeyDown}
+      className={cn(
+        "flex h-full cursor-pointer flex-col rounded-2xl bg-white p-6 text-center ring-1 ring-black/[0.04] transition-[box-shadow,transform,ring-color] duration-300 ease-out motion-reduce:transition-none sm:p-7",
+        "shadow-[0_10px_36px_-16px_rgba(17,17,17,0.22)]",
+        "hover:-translate-y-1.5 hover:shadow-[0_28px_64px_-14px_rgba(17,17,17,0.42)] hover:ring-[var(--color-primary)]/25",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)] focus-visible:ring-offset-2",
+        open && "-translate-y-1.5 shadow-[0_28px_64px_-14px_rgba(17,17,17,0.42)] ring-[var(--color-primary)]/25",
+      )}
+    >
+      <div className="mx-auto flex size-[7.25rem] items-center justify-center rounded-full border-[5px] border-[var(--color-primary)] bg-white shadow-[0_10px_28px_-14px_rgba(17,17,17,0.35)]">
+        <Image
+          src={icon}
+          alt=""
+          width={72}
+          height={72}
+          className="h-[4.25rem] w-[4.25rem] object-contain brightness-0"
+        />
+      </div>
 
       <h2 className="mt-5 font-[family-name:var(--font-instrument)] text-[1.35rem] font-semibold leading-snug text-[var(--color-contrast-2)]">
         {title}
       </h2>
       <p className="mt-3 text-body-foreground">{short}</p>
 
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        aria-controls={panelId}
-        className="mt-5 inline-flex min-h-10 items-center justify-center gap-1.5 self-center text-sm font-medium text-[var(--color-primary)] transition-colors hover:text-[var(--color-primary-hover)]"
-      >
+      <span className="mt-5 inline-flex min-h-10 items-center justify-center gap-1.5 self-center text-sm font-medium text-[var(--color-primary)]">
         {open ? "Skrýt" : "Více informací"}
         <ChevronDown
           className={cn(
@@ -67,7 +90,7 @@ export function ServiceCard({
           aria-hidden
           strokeWidth={2.25}
         />
-      </button>
+      </span>
 
       <div
         id={panelId}
@@ -78,7 +101,7 @@ export function ServiceCard({
         <div ref={contentRef} className="space-y-4 pt-5 text-left text-body-muted">
           <p>{details}</p>
           {partner ? (
-            <div className="flex flex-col items-center gap-3 pt-1">
+            <div className="flex flex-col items-center gap-3 pt-1" onClick={stopCardToggle}>
               <a
                 href={partner.href}
                 target="_blank"

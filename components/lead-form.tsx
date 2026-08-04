@@ -292,8 +292,8 @@ export function LeadForm() {
         className={cn(
           "flex h-12 min-h-[48px] w-full items-center justify-center gap-2 rounded-xl text-base font-semibold transition-all disabled:pointer-events-none",
           status === "success"
-            ? "border-2 border-[var(--color-primary)]/20 bg-[var(--color-primary)]/[0.07] text-[var(--color-primary)] shadow-none"
-            : "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] disabled:opacity-[0.65]",
+            ? "border-2 border-[var(--color-cta)]/20 bg-[var(--color-cta)]/[0.07] text-[var(--color-cta)] shadow-none"
+            : "bg-[var(--color-cta)] text-white hover:bg-[var(--color-cta-hover)] disabled:opacity-[0.65]",
         )}
       >
         {status === "sending" ? (
