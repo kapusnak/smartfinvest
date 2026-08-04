@@ -10,8 +10,10 @@ export function Footer() {
 
   return (
     <footer id="kontakty" className="bg-[var(--color-footer)] text-white">
-      <Container className="py-10 lg:py-12">
-        <ul className="flex flex-col items-center gap-1.5 sm:flex-row sm:justify-center sm:gap-6">
+      <Container className="py-6 lg:py-7">
+        <SectionRule className="bg-white/20" />
+
+        <ul className="mt-4 flex flex-col items-center gap-1.5 sm:flex-row sm:justify-center sm:gap-6">
           <li>
             <Link href="/ochrana-osobnich-udaju" className={linkSubtle}>
               Ochrana osobních údajů
@@ -24,10 +26,9 @@ export function Footer() {
           </li>
         </ul>
 
-        <div className="mt-8 space-y-1.5 pt-5 text-center text-xs leading-normal text-white/65">
-          <SectionRule className="mb-5 bg-white/20" />
-          <p className="pt-0.5 text-white/95">© {year} Smart Finvest s.r.o. Všechna práva vyhrazena.</p>
-        </div>
+        <p className="mt-4 text-center text-xs leading-normal text-white/65">
+          © {year} Smart Finvest s.r.o. Všechna práva vyhrazena.
+        </p>
       </Container>
     </footer>
   )
