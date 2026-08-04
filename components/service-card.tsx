@@ -65,13 +65,13 @@ export function ServiceCard({
         open && "-translate-y-1.5 shadow-[0_28px_64px_-14px_rgba(17,17,17,0.42)] ring-[var(--color-primary)]/25",
       )}
     >
-      <div className="mx-auto flex size-[7.25rem] items-center justify-center rounded-full border-[5px] border-[var(--color-primary)] bg-white shadow-[0_10px_28px_-14px_rgba(17,17,17,0.35)]">
+      <div className="mx-auto flex size-24 items-center justify-center rounded-[28px] bg-[var(--color-primary)]/10">
         <Image
           src={icon}
           alt=""
           width={72}
           height={72}
-          className="h-[4.25rem] w-[4.25rem] object-contain brightness-0"
+          className="h-11 w-11 object-contain brightness-0 opacity-80"
         />
       </div>
 
