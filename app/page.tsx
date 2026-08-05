@@ -246,7 +246,7 @@ export default function HomePage() {
                   </ul>
 
                   <a
-                    href="https://wa.me/420777400256"
+                    href="https://wa.me/420776680720"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-6 inline-flex max-w-full items-center gap-3 rounded-xl border border-[#25D366]/45 bg-transparent px-4 py-3 transition-colors hover:border-[#25D366] hover:bg-[#25D366]/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/40 focus-visible:ring-offset-2"
