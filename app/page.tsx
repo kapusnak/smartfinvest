@@ -7,6 +7,7 @@ import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
 import { LeadForm } from "@/components/lead-form"
 import { ServiceCard } from "@/components/service-card"
+import { formatYearsOfExperience } from "@/lib/years-of-experience"
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -16,44 +17,51 @@ function WhatsAppIcon({ className }: { className?: string }) {
   )
 }
 
-const services = [
-  {
-    icon: "/images/icons/dum.png",
-    title: "Refinancování na míru",
-    short: "Lepší podmínky pro vaše závazky a zástavy nemovitostí.",
-    details:
-      "Pomáháme klientům získat výhodnější podmínky u závazků a zástav zajištěných nemovitostí. Spolupracujeme s finančními institucemi i soukromými investory, abychom dosáhli nižších splátek, prodloužení splatnosti nebo celkově udržitelnějšího nastavení financování.",
-    partner: null as null | { href: string; label: string; logo: string; width: number },
-  },
-  {
-    icon: "/images/icons/dluh.png",
-    title: "Řešení dluhů a pohledávek",
-    short: "Efektivní správa a vymáhání pohledávek.",
-    details:
-      "Máme více než 25 let zkušeností v oblasti správy a vymáhání pohledávek pro firmy i jednotlivce. Nabízíme mimosoudní řešení, soudní postupy i exekuce ve spolupráci s právníky. Kromě inkasa zajišťujeme také odkup jednotlivých pohledávek i celých portfolií, upomínkový servis a poradenství v prevenci vzniku dlužných částek. Naše práce je transparentní, efektivní a bez skrytých poplatků.",
-    partner: {
-      href: "https://vymahanidluzniku.cz/",
-      label: "vymahanidluzniku.cz",
-      logo: "/images/partners/inkasni-kancelar.png",
-      width: 175,
+function getServices(yearsOfExperience: string) {
+  return [
+    {
+      icon: "/images/icons/dum.png",
+      title: "Refinancování na míru",
+      short: "Lepší podmínky pro vaše závazky a zástavy nemovitostí.",
+      details:
+        "Pomáháme klientům získat výhodnější podmínky u závazků a zástav zajištěných nemovitostí. Spolupracujeme s finančními institucemi i soukromými investory, abychom dosáhli nižších splátek, prodloužení splatnosti nebo celkově udržitelnějšího nastavení financování.",
+      partner: null as null | { href: string; label: string; logo: string; width: number },
     },
-  },
-  {
-    icon: "/images/icons/financovani.png",
-    title: "Financování na míru",
-    short: "Zajistíme kapitál pro Vaše plány i rozvoj podnikání",
-    details:
-      "Klientům pomáháme zajistit individuální financování – ať už jde o refinancování závazků, rozvoj podnikání nebo využití zástavy majetku. Součástí naší nabídky je také dočasný výkup vozidel s možností zpětného odkupu. Zajišťujeme financování od menších částek až po vysoké objemy určené pro náročné projekty. Naším cílem je vytvářet oboustranně výhodná řešení, která přinesou stabilitu klientovi a jistotu investorovi.",
-    partner: {
-      href: "https://docasnyvykup.cz/",
-      label: "docasnyvykup.cz",
-      logo: "/images/partners/docasnyvykup.png",
-      width: 107,
+    {
+      icon: "/images/icons/dluh.png",
+      title: "Řešení dluhů a pohledávek",
+      short: "Efektivní správa a vymáhání pohledávek.",
+      details: `Máme více než ${yearsOfExperience} zkušeností v oblasti správy a vymáhání pohledávek pro firmy i jednotlivce. Nabízíme mimosoudní řešení, soudní postupy i exekuce ve spolupráci s právníky. Kromě inkasa zajišťujeme také odkup jednotlivých pohledávek i celých portfolií, upomínkový servis a poradenství v prevenci vzniku dlužných částek. Naše práce je transparentní, efektivní a bez skrytých poplatků.`,
+      partner: {
+        href: "https://vymahanidluzniku.cz/",
+        label: "vymahanidluzniku.cz",
+        logo: "/images/partners/inkasni-kancelar.png",
+        width: 175,
+      },
     },
-  },
-]
+    {
+      icon: "/images/icons/financovani.png",
+      title: "Financování na míru",
+      short: "Zajistíme kapitál pro Vaše plány i rozvoj podnikání",
+      details:
+        "Klientům pomáháme zajistit individuální financování – ať už jde o refinancování závazků, rozvoj podnikání nebo využití zástavy majetku. Součástí naší nabídky je také dočasný výkup vozidel s možností zpětného odkupu. Zajišťujeme financování od menších částek až po vysoké objemy určené pro náročné projekty. Naším cílem je vytvářet oboustranně výhodná řešení, která přinesou stabilitu klientovi a jistotu investorovi.",
+      partner: {
+        href: "https://docasnyvykup.cz/",
+        label: "docasnyvykup.cz",
+        logo: "/images/partners/docasnyvykup.png",
+        width: 107,
+      },
+    },
+  ]
+}
+
+/** Keep years-of-experience copy fresh after New Year without a full redeploy. */
+export const revalidate = 86400
 
 export default function HomePage() {
+  const yearsOfExperience = formatYearsOfExperience()
+  const services = getServices(yearsOfExperience)
+
   return (
     <>
       <main>
@@ -142,8 +150,9 @@ export default function HomePage() {
                   </h2>
                   <p className="mt-4 text-body-foreground">
                     Smart Finvest s.r.o. je mladá společnost, která vznikla jako přirozený vývoj dlouholetého
-                    podnikání v oblasti financí, investic a správy pohledávek. Naše kořeny sahají více než 25
-                    let zpět, kdy jsme působili jako fyzická osoba podnikající v tomto oboru.
+                    podnikání v oblasti financí, investic a správy pohledávek. Naše kořeny sahají více než{" "}
+                    {yearsOfExperience} zpět, kdy jsme působili jako fyzická osoba podnikající v tomto
+                    oboru.
                   </p>
                   <p className="mt-4 text-body-foreground">
                     Máme rozsáhlé zkušenosti nejen s financemi a investicemi, ale také s řešením a správou
