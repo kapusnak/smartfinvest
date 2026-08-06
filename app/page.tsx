@@ -1,11 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Mail, MapPin, Phone } from "lucide-react"
-import { Suspense } from "react"
 
 import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
-import { LeadForm } from "@/components/lead-form"
 import { ServiceCard } from "@/components/service-card"
 import { formatYearsOfExperience } from "@/lib/years-of-experience"
 
@@ -20,18 +18,10 @@ function WhatsAppIcon({ className }: { className?: string }) {
 function getServices(yearsOfExperience: string) {
   return [
     {
-      icon: "/images/icons/dum.png",
-      title: "Refinancování na míru",
-      short: "Lepší podmínky pro vaše závazky a zástavy nemovitostí.",
-      details:
-        "Pomáháme klientům získat výhodnější podmínky u závazků a zástav zajištěných nemovitostí. Spolupracujeme s finančními institucemi i soukromými investory, abychom dosáhli nižších splátek, prodloužení splatnosti nebo celkově udržitelnějšího nastavení financování.",
-      partner: null as null | { href: string; label: string; logo: string; width: number },
-    },
-    {
       icon: "/images/icons/dluh.png",
-      title: "Řešení dluhů a pohledávek",
-      short: "Efektivní správa a vymáhání pohledávek.",
-      details: `Máme více než ${yearsOfExperience} zkušeností v oblasti správy a vymáhání pohledávek pro firmy i jednotlivce. Nabízíme mimosoudní řešení, soudní postupy i exekuce ve spolupráci s právníky. Kromě inkasa zajišťujeme také odkup jednotlivých pohledávek i celých portfolií, upomínkový servis a poradenství v prevenci vzniku dlužných částek. Naše práce je transparentní, efektivní a bez skrytých poplatků.`,
+      title: "Vymáhání pohledávek",
+      short: "Mimosoudní i soudní řešení pohledávek pro věřitele.",
+      details: `Máme více než ${yearsOfExperience} zkušeností v oblasti správy a vymáhání pohledávek pro firmy i jednotlivce. Nabízíme mimosoudní řešení, soudní postupy i exekuce ve spolupráci s právníky. Naše práce je transparentní, efektivní a bez skrytých poplatků.`,
       partner: {
         href: "https://vymahanidluzniku.cz/",
         label: "vymahanidluzniku.cz",
@@ -41,16 +31,19 @@ function getServices(yearsOfExperience: string) {
     },
     {
       icon: "/images/icons/financovani.png",
-      title: "Financování na míru",
-      short: "Zajistíme kapitál pro Vaše plány i rozvoj podnikání",
+      title: "Odkup pohledávek a portfolií",
+      short: "Odkup jednotlivých pohledávek i celých portfolií.",
       details:
-        "Klientům pomáháme zajistit individuální financování – ať už jde o refinancování závazků, rozvoj podnikání nebo využití zástavy majetku. Součástí naší nabídky je také dočasný výkup vozidel s možností zpětného odkupu. Zajišťujeme financování od menších částek až po vysoké objemy určené pro náročné projekty. Naším cílem je vytvářet oboustranně výhodná řešení, která přinesou stabilitu klientovi a jistotu investorovi.",
-      partner: {
-        href: "https://docasnyvykup.cz/",
-        label: "docasnyvykup.cz",
-        logo: "/images/partners/docasnyvykup.png",
-        width: 107,
-      },
+        "Kromě inkasa zajišťujeme také odkup jednotlivých pohledávek i celých portfolií. Díky zkušenostem se správou pohledávek dokážeme nabídnout férový a rychlý postup pro věřitele, kteří chtějí pohledávky převést.",
+      partner: null as null | { href: string; label: string; logo: string; width: number },
+    },
+    {
+      icon: "/images/icons/dum.png",
+      title: "Upomínkový servis a prevence",
+      short: "Upomínky a poradenství proti vzniku dlužných částek.",
+      details:
+        "Zajišťujeme upomínkový servis a poradenství v prevenci vzniku dlužných částek. Pomáháme věřitelům nastavit procesy tak, aby se pohledávky řešily včas a transparentně.",
+      partner: null,
     },
   ]
 }
@@ -83,18 +76,20 @@ export default function HomePage() {
           <Container className="relative z-10 py-12 md:py-16 lg:py-20">
             <div className="mx-auto max-w-[565px] text-center text-white">
               <h1 className="font-[family-name:var(--font-instrument)] text-3xl font-semibold leading-tight tracking-[0.2px] sm:text-4xl md:text-[2.15rem] md:leading-snug">
-                Refinancování nemovitostí
-                <br />a závazků na míru
+                Správa a vymáhání
+                <br />
+                pohledávek pro věřitele
               </h1>
               <p className="mx-auto mt-5 max-w-xl text-body-inverse tracking-[0.2px]">
-                Pomůžeme Vám sloučit splátky, získat výhodnější podmínky.
+                Inkasní kancelář s dlouholetou zkušeností — mimosoudní řešení, soudní postupy i odkup
+                pohledávek.
               </p>
               <div className="mt-6 flex justify-center">
                 <Link
-                  href="/#formular"
+                  href="/#kontakty"
                   className="inline-flex min-h-[48px] items-center justify-center rounded-[25px] bg-[var(--color-cta)] px-8 text-sm font-semibold uppercase tracking-[0.2px] text-white transition-colors hover:bg-[var(--color-cta-hover)]"
                 >
-                  Nezávazná konzultace zdarma
+                  Kontaktujte nás
                 </Link>
               </div>
             </div>
@@ -123,145 +118,153 @@ export default function HomePage() {
         </section>
 
         <section
-          id="formular"
           className="bg-[var(--color-section-tint)] py-12 md:py-16"
-          aria-label="Formulář a kontakty"
+          aria-label="Řešení pro klienty"
+        >
+          <Container>
+            <div className="mx-auto max-w-2xl text-center">
+              <h2 className="font-[family-name:var(--font-instrument)] text-2xl font-semibold text-[var(--color-foreground)] md:text-[2.1rem]">
+                Řešení pro klienty
+              </h2>
+              <p className="mt-4 text-body-foreground">
+                Potřebujete jako klient aktivně vyřešit svou situaci? Nabízíme také financování,
+                refinancování, zajištěné úvěry a dočasný výkup.
+              </p>
+              <div className="mt-6 flex justify-center">
+                <Link
+                  href="/reseni-pro-klienty"
+                  className="inline-flex min-h-[48px] items-center justify-center rounded-[25px] bg-[var(--color-cta)] px-8 text-sm font-semibold uppercase tracking-[0.2px] text-white transition-colors hover:bg-[var(--color-cta-hover)]"
+                >
+                  Zobrazit řešení pro klienty
+                </Link>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        <section
+          id="kontakty"
+          className="bg-white py-12 md:py-16"
+          aria-label="O společnosti a kontakty"
         >
           <Container>
             <div className="grid gap-10 lg:grid-cols-2 lg:gap-12 lg:items-start">
               <div>
                 <h2 className="font-[family-name:var(--font-instrument)] text-2xl font-semibold text-[var(--color-foreground)] md:text-[2.1rem]">
-                  Nezávazná poptávka
+                  O společnosti
                 </h2>
-                <p className="mt-2 text-body-muted">
-                  Vyplňte formulář — ozveme se a domluvíme další postup.
+                <p className="mt-4 text-body-foreground">
+                  Smart Finvest s.r.o. je mladá společnost, která vznikla jako přirozený vývoj
+                  dlouholetého podnikání v oblasti financí, investic a správy pohledávek. Naše kořeny
+                  sahají více než {yearsOfExperience} zpět, kdy jsme působili jako fyzická osoba
+                  podnikající v tomto oboru.
                 </p>
-                <div className="mt-6 rounded-2xl border border-[var(--color-foreground)]/[0.08] bg-white p-5 shadow-sm sm:p-8">
-                  <Suspense fallback={null}>
-                    <LeadForm />
-                  </Suspense>
-                </div>
+                <p className="mt-4 text-body-foreground">
+                  Máme rozsáhlé zkušenosti s řešením a správou pohledávek. Díky tomu dokážeme
+                  věřitelům nabídnout komplexní služby inkasní kanceláře. Pro klienty, kteří chtějí
+                  svou situaci aktivně řešit, nabízíme jako navazující možnost i refinancování
+                  úvěrů a zástav nemovitostí, konsolidaci závazků i individuální financování.
+                </p>
               </div>
 
-              <div className="space-y-8">
-                <div>
-                  <h2 className="font-[family-name:var(--font-instrument)] text-2xl font-semibold text-[var(--color-foreground)] md:text-[2.1rem]">
-                    O společnosti
-                  </h2>
-                  <p className="mt-4 text-body-foreground">
-                    Smart Finvest s.r.o. je mladá společnost, která vznikla jako přirozený vývoj dlouholetého
-                    podnikání v oblasti financí, investic a správy pohledávek. Naše kořeny sahají více než{" "}
-                    {yearsOfExperience} zpět, kdy jsme působili jako fyzická osoba podnikající v tomto
-                    oboru.
-                  </p>
-                  <p className="mt-4 text-body-foreground">
-                    Máme rozsáhlé zkušenosti nejen s financemi a investicemi, ale také s řešením a správou
-                    pohledávek. Díky tomu dokážeme klientům nabídnout komplexní služby, které zohledňují i
-                    složitější finanční situace. Naším cílem je pomáhat klientům nacházet řešení v oblasti
-                    refinancování úvěrů a zástav nemovitostí, konsolidace závazků i individuálních finančních
-                    potřeb.
-                  </p>
+              <div>
+                <h2 className="font-[family-name:var(--font-instrument)] text-2xl font-semibold text-[var(--color-foreground)] md:text-[2.1rem]">
+                  Kontaktujte nás
+                </h2>
+
+                <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
+                  <Image
+                    src="/images/logo-circle.png"
+                    alt="Smart Finvest s.r.o. — Finance, investice, pohledávky"
+                    width={148}
+                    height={148}
+                    className="h-[148px] w-[148px] shrink-0 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="text-lg font-semibold leading-snug text-[var(--color-foreground)] md:text-xl">
+                      Smart Finvest s.r.o.
+                    </p>
+                    <p className="mt-1 text-sm text-[var(--color-muted)] md:text-base">IČ: 23627000</p>
+                  </div>
                 </div>
 
-                <div>
-                  <h2 className="font-[family-name:var(--font-instrument)] text-2xl font-semibold text-[var(--color-foreground)] md:text-[2.1rem]">
-                    Kontaktujte nás
-                  </h2>
-
-                  <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
-                    <Image
-                      src="/images/logo-circle.png"
-                      alt="Smart Finvest s.r.o. — Finance, investice, pohledávky"
-                      width={148}
-                      height={148}
-                      className="h-[148px] w-[148px] shrink-0 rounded-full object-cover"
-                    />
+                <ul className="mt-6 space-y-4">
+                  <li className="flex gap-3">
+                    <span
+                      className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
+                      aria-hidden
+                    >
+                      <MapPin className="h-[1.125rem] w-[1.125rem]" strokeWidth={2.25} />
+                    </span>
                     <div>
-                      <p className="text-lg font-semibold leading-snug text-[var(--color-foreground)] md:text-xl">
-                        Smart Finvest s.r.o.
+                      <p className="text-sm font-medium text-[var(--color-muted)]">Adresa</p>
+                      <p className="mt-0.5 text-body-foreground">
+                        Podvesná VII/6192
+                        <br />
+                        760 01 Zlín
                       </p>
-                      <p className="mt-1 text-sm text-[var(--color-muted)] md:text-base">IČ: 23627000</p>
                     </div>
-                  </div>
-
-                  <ul className="mt-6 space-y-4">
-                    <li className="flex gap-3">
-                      <span
-                        className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
-                        aria-hidden
+                  </li>
+                  <li className="flex gap-3">
+                    <span
+                      className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
+                      aria-hidden
+                    >
+                      <Mail className="h-[1.125rem] w-[1.125rem]" strokeWidth={2.25} />
+                    </span>
+                    <div>
+                      <p className="text-sm font-medium text-[var(--color-muted)]">E-mail</p>
+                      <a
+                        href="mailto:info@smartfinvest.cz"
+                        className="mt-0.5 inline-block text-body-foreground transition-colors hover:text-[var(--color-primary)]"
                       >
-                        <MapPin className="h-[1.125rem] w-[1.125rem]" strokeWidth={2.25} />
-                      </span>
-                      <div>
-                        <p className="text-sm font-medium text-[var(--color-muted)]">Adresa</p>
-                        <p className="mt-0.5 text-body-foreground">
-                          Podvesná VII/6192
-                          <br />
-                          760 01 Zlín
-                        </p>
-                      </div>
-                    </li>
-                    <li className="flex gap-3">
-                      <span
-                        className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
-                        aria-hidden
-                      >
-                        <Mail className="h-[1.125rem] w-[1.125rem]" strokeWidth={2.25} />
-                      </span>
-                      <div>
-                        <p className="text-sm font-medium text-[var(--color-muted)]">E-mail</p>
+                        info@smartfinvest.cz
+                      </a>
+                    </div>
+                  </li>
+                  <li className="flex gap-3">
+                    <span
+                      className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
+                      aria-hidden
+                    >
+                      <Phone className="h-[1.125rem] w-[1.125rem]" strokeWidth={2.25} />
+                    </span>
+                    <div>
+                      <p className="text-sm font-medium text-[var(--color-muted)]">Telefon</p>
+                      <div className="mt-0.5 flex flex-col gap-0.5">
                         <a
-                          href="mailto:info@smartfinvest.cz"
-                          className="mt-0.5 inline-block text-body-foreground transition-colors hover:text-[var(--color-primary)]"
+                          href="tel:+420777400256"
+                          className="text-body-foreground transition-colors hover:text-[var(--color-primary)]"
                         >
-                          info@smartfinvest.cz
+                          +420 777 400 256
+                        </a>
+                        <a
+                          href="tel:+420776680720"
+                          className="text-body-foreground transition-colors hover:text-[var(--color-primary)]"
+                        >
+                          +420 776 680 720
                         </a>
                       </div>
-                    </li>
-                    <li className="flex gap-3">
-                      <span
-                        className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
-                        aria-hidden
-                      >
-                        <Phone className="h-[1.125rem] w-[1.125rem]" strokeWidth={2.25} />
-                      </span>
-                      <div>
-                        <p className="text-sm font-medium text-[var(--color-muted)]">Telefon</p>
-                        <div className="mt-0.5 flex flex-col gap-0.5">
-                          <a
-                            href="tel:+420777400256"
-                            className="text-body-foreground transition-colors hover:text-[var(--color-primary)]"
-                          >
-                            +420 777 400 256
-                          </a>
-                          <a
-                            href="tel:+420776680720"
-                            className="text-body-foreground transition-colors hover:text-[var(--color-primary)]"
-                          >
-                            +420 776 680 720
-                          </a>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+                    </div>
+                  </li>
+                </ul>
 
-                  <a
-                    href="https://wa.me/420776680720"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-6 inline-flex max-w-full items-center gap-3 rounded-xl border border-[#25D366]/45 bg-transparent px-4 py-3 transition-colors hover:border-[#25D366] hover:bg-[#25D366]/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/40 focus-visible:ring-offset-2"
-                  >
-                    <WhatsAppIcon className="h-7 w-7 shrink-0 text-[#25D366]" />
-                    <span className="min-w-0">
-                      <span className="block text-sm font-semibold leading-snug text-[var(--color-foreground)] sm:text-base">
-                        Napište nám na WhatsApp
-                      </span>
-                      <span className="mt-0.5 block text-xs leading-snug text-[var(--color-muted)] sm:text-sm">
-                        Rychlá zpráva — odpovíme co nejdříve
-                      </span>
+                <a
+                  href="https://wa.me/420776680720"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex max-w-full items-center gap-3 rounded-xl border border-[#25D366]/45 bg-transparent px-4 py-3 transition-colors hover:border-[#25D366] hover:bg-[#25D366]/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/40 focus-visible:ring-offset-2"
+                >
+                  <WhatsAppIcon className="h-7 w-7 shrink-0 text-[#25D366]" />
+                  <span className="min-w-0">
+                    <span className="block text-sm font-semibold leading-snug text-[var(--color-foreground)] sm:text-base">
+                      Napište nám na WhatsApp
                     </span>
-                  </a>
-                </div>
+                    <span className="mt-0.5 block text-xs leading-snug text-[var(--color-muted)] sm:text-sm">
+                      Rychlá zpráva — odpovíme co nejdříve
+                    </span>
+                  </span>
+                </a>
               </div>
             </div>
           </Container>

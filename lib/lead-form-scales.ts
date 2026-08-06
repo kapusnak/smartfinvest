@@ -42,13 +42,31 @@ export function formatRangeLabelKc(value: number): string {
   return `${(value / 1000).toFixed(0)} tis. Kč`
 }
 
-export const realEstateServices = [
-  { value: "refinancovani-nemovitosti", label: "Refinancování nemovitosti" },
-  { value: "reseni-pohledavek", label: "Řešení pohledávek" },
-  { value: "financovani-a-investice", label: "Financování a investice" },
+export const clientServices = [
+  { value: "financovani", label: "Financování" },
+  { value: "refinancovani", label: "Refinancování" },
+  { value: "zajistene-uvery", label: "Zajištěné úvěry" },
+  { value: "docasny-vykup", label: "Dočasný výkup" },
 ] as const
 
-export type RealEstateServiceValue = (typeof realEstateServices)[number]["value"]
+/** @deprecated Use `clientServices` */
+export const realEstateServices = clientServices
+
+export type ClientServiceValue = (typeof clientServices)[number]["value"]
+export type RealEstateServiceValue = ClientServiceValue
+
+export const assetTypeOptions = [
+  { value: "Nemovitost", label: "Nemovitost" },
+  { value: "Vozidlo", label: "Vozidlo" },
+] as const
+
+export type AssetTypeValue = (typeof assetTypeOptions)[number]["value"]
+
+/** Services that ask for collateral type (nemovitost / vozidlo). */
+export const SERVICES_WITH_ASSET: ReadonlySet<ClientServiceValue> = new Set([
+  "zajistene-uvery",
+  "docasny-vykup",
+])
 
 export const SOCIAL_PROOF_FALLBACK =
-  "Klientům pomáháme s financováním a refinancováním — ozveme se vám obvykle ihned."
+  "Klientům pomáháme najít vhodné řešení — ozveme se vám obvykle ihned."

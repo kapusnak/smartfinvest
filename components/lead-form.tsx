@@ -15,12 +15,16 @@ import {
   DEFAULT_REAL_ESTATE_AMOUNT,
   REAL_ESTATE_AMOUNT_VALUES,
   REAL_ESTATE_RANGE,
+  SERVICES_WITH_ASSET,
   SOCIAL_PROOF_FALLBACK,
+  assetTypeOptions,
+  clientServices,
   formatAmountKc,
   formatRangeLabelKc,
   realEstateAmountToIndex,
-  realEstateServices,
   snapToRealEstateValue,
+  type AssetTypeValue,
+  type ClientServiceValue,
 } from "@/lib/lead-form-scales"
 import { PhoneDigitsInput } from "@/components/phone-digits-input"
 import { toFullPhone } from "@/lib/phone-420"
@@ -33,10 +37,13 @@ const phoneInputWrapperClass =
   "h-12 w-full rounded-xl border border-black/20 bg-white px-4 text-base text-[var(--color-foreground)] shadow-sm outline-none transition-[box-shadow] focus-within:ring-2 focus-within:ring-[var(--color-primary)]"
 
 const serviceTypeEnum = z.enum([
-  "refinancovani-nemovitosti",
-  "reseni-pohledavek",
-  "financovani-a-investice",
+  "financovani",
+  "refinancovani",
+  "zajistene-uvery",
+  "docasny-vykup",
 ])
+
+const assetTypeEnum = z.enum(["Nemovitost", "Vozidlo"])
 
 const leadFormSchema = z
   .object({
@@ -44,6 +51,7 @@ const leadFormSchema = z
     email: z.string(),
     phoneDigits: z.string(),
     serviceType: serviceTypeEnum,
+    assetType: assetTypeEnum,
     amountCzk: z.number(),
   })
   .superRefine((data, ctx) => {
@@ -76,7 +84,8 @@ export function LeadForm() {
       name: "",
       email: "",
       phoneDigits: "",
-      serviceType: "refinancovani-nemovitosti",
+      serviceType: "financovani",
+      assetType: "Nemovitost",
       amountCzk: snapToRealEstateValue(DEFAULT_REAL_ESTATE_AMOUNT),
     },
     mode: "onSubmit",
@@ -85,8 +94,10 @@ export function LeadForm() {
 
   const amountCzk = useWatch({ control: form.control, name: "amountCzk" })
   const serviceType = useWatch({ control: form.control, name: "serviceType" })
+  const assetType = useWatch({ control: form.control, name: "assetType" })
   const maxIdx = REAL_ESTATE_AMOUNT_VALUES.length - 1
   const valueIndex = realEstateAmountToIndex(amountCzk)
+  const showAssetType = SERVICES_WITH_ASSET.has(serviceType as ClientServiceValue)
 
   const onSubmit = async (values: LeadFormValues) => {
     if (status === "success") return
@@ -94,15 +105,16 @@ export function LeadForm() {
     if (!phone) return
     setStatus("sending")
     try {
+      const needsAsset = SERVICES_WITH_ASSET.has(values.serviceType)
       await sendLead({
         source: "calculator",
         phone,
         email: values.email.trim() || undefined,
         name: values.name.trim(),
         amount: snapToRealEstateValue(values.amountCzk),
-        assetType: "Nemovitost",
+        ...(needsAsset ? { assetType: values.assetType } : {}),
         serviceType:
-          realEstateServices.find((s) => s.value === values.serviceType)?.label ?? values.serviceType,
+          clientServices.find((s) => s.value === values.serviceType)?.label ?? values.serviceType,
       })
       setStatus("success")
       toast.success("Děkujeme za poptávku", {
@@ -114,7 +126,8 @@ export function LeadForm() {
         name: "",
         email: values.email,
         phoneDigits: values.phoneDigits,
-        serviceType: "refinancovani-nemovitosti",
+        serviceType: "financovani",
+        assetType: "Nemovitost",
         amountCzk: snapToRealEstateValue(DEFAULT_REAL_ESTATE_AMOUNT),
       })
     } catch (e) {
@@ -156,7 +169,7 @@ export function LeadForm() {
           Typ služby
         </p>
         <div className="flex flex-wrap gap-2" role="radiogroup" aria-labelledby="lead-service-label">
-          {realEstateServices.map((service) => (
+          {clientServices.map((service) => (
             <button
               key={service.value}
               type="button"
@@ -176,6 +189,34 @@ export function LeadForm() {
           ))}
         </div>
       </div>
+
+      {showAssetType ? (
+        <div className="space-y-2">
+          <p className="text-body font-medium text-[var(--color-muted)]" id="lead-asset-label">
+            Typ zajištění
+          </p>
+          <div className="flex flex-wrap gap-2" role="radiogroup" aria-labelledby="lead-asset-label">
+            {assetTypeOptions.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                role="radio"
+                aria-checked={assetType === option.value}
+                onClick={() => form.setValue("assetType", option.value as AssetTypeValue)}
+                className={cn(
+                  "min-w-0 flex-1 px-3 py-2.5 text-center text-sm font-medium leading-tight transition-all",
+                  "rounded-xl border-2",
+                  assetType === option.value
+                    ? "border-[var(--color-primary)] bg-[var(--color-surface-cream)] text-[var(--color-primary)]"
+                    : "border-transparent bg-[var(--color-surface-muted)] text-[var(--color-muted)] hover:border-[var(--color-primary)]/30",
+                )}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : null}
 
       <div className="space-y-2">
         <div className="flex items-center justify-between gap-2">
@@ -307,7 +348,7 @@ export function LeadForm() {
             Poptávka odeslána
           </>
         ) : (
-          "Odeslat nezávaznou poptávku"
+          "Odeslat nezávaznou žádost"
         )}
       </button>
 

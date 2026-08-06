@@ -9,7 +9,7 @@ export function Footer() {
     "text-sm leading-normal text-white/65 no-underline transition-colors hover:text-white hover:underline hover:decoration-white/35 hover:underline-offset-2"
 
   return (
-    <footer id="kontakty" className="bg-[var(--color-footer)] text-white">
+    <footer className="bg-[var(--color-footer)] text-white">
       <Container className="py-6 lg:py-7">
         <SectionRule className="bg-white/20" />
 

@@ -17,7 +17,7 @@ export function FormularInlineLink({ children, variant = "cream", className }: P
 
   return (
     <Link
-      href="/#formular"
+      href="/reseni-pro-klienty#formular"
       scroll
       className={cn(styles, className)}
       aria-label="Přejít k formuláři poptávky"

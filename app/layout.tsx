@@ -3,6 +3,7 @@ import { Instrument_Sans, Jost } from "next/font/google"
 
 import { AppToaster } from "@/components/app-toaster"
 import { BottomChrome } from "@/components/bottom-chrome"
+import { SiteHeader } from "@/components/site-header"
 import { getSiteUrlObject } from "@/lib/site-url"
 
 import "./globals.css"
@@ -20,9 +21,9 @@ const instrumentSans = Instrument_Sans({
   display: "swap",
 })
 
-const siteTitle = "Smart Finvest s.r.o. | Refinancování, pohledávky, financování"
+const siteTitle = "Smart Finvest s.r.o. | Vymáhání pohledávek a správa pohledávek"
 const siteDescription =
-  "Refinancování nemovitostí, řešení pohledávek a financování na míru. Smart Finvest s.r.o., Zlín. Nezávazná poptávka online."
+  "Inkasní kancelář — správa a vymáhání pohledávek pro věřitele. Smart Finvest s.r.o., Zlín. Navazující řešení i pro klienty."
 
 export const metadata: Metadata = {
   metadataBase: getSiteUrlObject(),
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="cs" className={`${jost.variable} ${instrumentSans.variable}`}>
       <body className="min-h-screen font-sans">
+        <SiteHeader />
         {children}
         <BottomChrome />
         <AppToaster />
