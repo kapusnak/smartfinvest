@@ -119,17 +119,7 @@ export function ServiceCard({
                 style={{ width: partner.width }}
               />
             </div>
-          ) : (
-            <div className="flex justify-center py-1">
-              <Image
-                src="/images/logo.png"
-                alt="Smart Finvest s.r.o."
-                width={140}
-                height={93}
-                className="h-auto w-[140px] rounded-[16px] object-contain"
-              />
-            </div>
-          )}
+          ) : null}
         </div>
       </div>
     </div>
