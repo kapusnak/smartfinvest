@@ -47,7 +47,7 @@ const clientServices = [
       href: "https://docasnyvykup.cz/",
       label: "docasnyvykup.cz",
       logo: "/images/partners/docasnyvykup.png",
-      width: 107,
+      width: 140,
     },
   },
 ]

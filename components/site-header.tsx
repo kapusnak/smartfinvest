@@ -40,7 +40,7 @@ export function SiteHeader() {
             priority
           />
           <span className="font-[family-name:var(--font-instrument)] text-base font-semibold tracking-[0.2px] text-[var(--color-foreground)] sm:text-lg">
-            Smart Finvest
+            Smart Finvest s.r.o.
           </span>
         </Link>
 

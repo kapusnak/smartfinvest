@@ -154,7 +154,7 @@ export default function HomePage() {
                   O společnosti
                 </h2>
                 <p className="mt-4 text-body-foreground">
-                  Smart Finvest s.r.o. je mladá společnost, která vznikla jako přirozený vývoj
+                  Smart Finvest s.r.o. je společnost, která vznikla jako přirozený vývoj
                   dlouholetého podnikání v oblasti financí, investic a správy pohledávek. Naše kořeny
                   sahají více než {yearsOfExperience} zpět, kdy jsme působili jako fyzická osoba
                   podnikající v tomto oboru.
