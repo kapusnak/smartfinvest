@@ -19,8 +19,8 @@ const SITE = {
   contactEmail: "info@smartfinvest.cz",
   signOff: "Váš tým Smart Finvest s.r.o.",
   phones: [
-    { tel: "+420777400256", display: "+420 777 400 256" },
     { tel: "+420776680720", display: "+420 776 680 720" },
+    { tel: "+420777400256", display: "+420 777 400 256" },
   ],
 } as const
 

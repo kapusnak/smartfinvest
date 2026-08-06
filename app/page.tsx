@@ -78,7 +78,7 @@ export default function HomePage() {
               <h1 className="font-[family-name:var(--font-instrument)] text-3xl font-semibold leading-tight tracking-[0.2px] sm:text-4xl md:text-[2.15rem] md:leading-snug">
                 Správa a vymáhání
                 <br />
-                pohledávek pro věřitele
+                pohledávek
               </h1>
               <p className="mx-auto mt-5 max-w-xl text-body-inverse tracking-[0.2px]">
                 Inkasní kancelář s dlouholetou zkušeností — mimosoudní řešení, soudní postupy i odkup
@@ -233,16 +233,16 @@ export default function HomePage() {
                       <p className="text-sm font-medium text-[var(--color-muted)]">Telefon</p>
                       <div className="mt-0.5 flex flex-col gap-0.5">
                         <a
-                          href="tel:+420777400256"
-                          className="text-body-foreground transition-colors hover:text-[var(--color-primary)]"
-                        >
-                          +420 777 400 256
-                        </a>
-                        <a
                           href="tel:+420776680720"
                           className="text-body-foreground transition-colors hover:text-[var(--color-primary)]"
                         >
                           +420 776 680 720
+                        </a>
+                        <a
+                          href="tel:+420777400256"
+                          className="text-body-foreground transition-colors hover:text-[var(--color-primary)]"
+                        >
+                          +420 777 400 256
                         </a>
                       </div>
                     </div>
