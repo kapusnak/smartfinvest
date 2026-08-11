@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
-import { BadgePercent, Car, Landmark, RefreshCw } from "lucide-react"
 
 import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
@@ -15,7 +14,7 @@ export const metadata: Metadata = {
 
 const clientServices = [
   {
-    icon: Landmark,
+    icon: "landmark" as const,
     title: "Financování na míru",
     short: "Zajistíme kapitál pro Vaše plány i rozvoj podnikání",
     details:
@@ -23,7 +22,7 @@ const clientServices = [
     partner: null as null | { href: string; label: string; logo: string; width: number },
   },
   {
-    icon: RefreshCw,
+    icon: "refreshCw" as const,
     title: "Refinancování na míru",
     short: "Lepší podmínky pro vaše závazky a zástavy nemovitostí.",
     details:
@@ -31,7 +30,7 @@ const clientServices = [
     partner: null,
   },
   {
-    icon: BadgePercent,
+    icon: "badgePercent" as const,
     title: "Zajištěné úvěry",
     short: "Prostředky se zajištěním nemovitosti či vozidla.",
     details:
@@ -39,7 +38,7 @@ const clientServices = [
     partner: null,
   },
   {
-    icon: Car,
+    icon: "car" as const,
     title: "Dočasný výkup",
     short: "Dočasný výkup vozidel s možností zpětného odkupu.",
     details:

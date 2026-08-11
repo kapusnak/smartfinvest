@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { FileWarning, Handshake, Mail, MapPin, Phone, ShieldCheck } from "lucide-react"
+import { Mail, MapPin, Phone } from "lucide-react"
 
 import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
@@ -18,7 +18,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
 function getServices(yearsOfExperience: string) {
   return [
     {
-      icon: FileWarning,
+      icon: "fileWarning" as const,
       title: "Vymáhání pohledávek",
       short: "Mimosoudní i soudní řešení pohledávek pro věřitele.",
       details: `Máme více než ${yearsOfExperience} zkušeností v oblasti správy a vymáhání pohledávek pro firmy i jednotlivce. Nabízíme mimosoudní řešení, soudní postupy i exekuce ve spolupráci s právníky. Naše práce je transparentní, efektivní a bez skrytých poplatků.`,
@@ -30,7 +30,7 @@ function getServices(yearsOfExperience: string) {
       },
     },
     {
-      icon: Handshake,
+      icon: "handshake" as const,
       title: "Odkup pohledávek a portfolií",
       short: "Odkup jednotlivých pohledávek i celých portfolií.",
       details:
@@ -38,7 +38,7 @@ function getServices(yearsOfExperience: string) {
       partner: null as null | { href: string; label: string; logo: string; width: number },
     },
     {
-      icon: ShieldCheck,
+      icon: "shieldCheck" as const,
       title: "Upomínkový servis a prevence",
       short: "Upomínky a poradenství proti vzniku dlužných částek.",
       details:

@@ -2,25 +2,48 @@
 
 import { useEffect, useId, useRef, useState, type KeyboardEvent, type MouseEvent } from "react"
 import Image from "next/image"
-import { ChevronDown, type LucideIcon } from "lucide-react"
+import {
+  BadgePercent,
+  Car,
+  ChevronDown,
+  FileWarning,
+  Handshake,
+  Landmark,
+  RefreshCw,
+  ShieldCheck,
+  type LucideIcon,
+} from "lucide-react"
 
 import { cn } from "@/lib/utils"
+
+const serviceIcons = {
+  fileWarning: FileWarning,
+  handshake: Handshake,
+  shieldCheck: ShieldCheck,
+  landmark: Landmark,
+  refreshCw: RefreshCw,
+  badgePercent: BadgePercent,
+  car: Car,
+} as const satisfies Record<string, LucideIcon>
+
+export type ServiceIconName = keyof typeof serviceIcons
 
 type Partner = { href: string; label: string; logo: string; width: number }
 
 export function ServiceCard({
-  icon: Icon,
+  icon,
   title,
   short,
   details,
   partner,
 }: {
-  icon: LucideIcon
+  icon: ServiceIconName
   title: string
   short: string
   details: string
   partner: Partner | null
 }) {
+  const Icon = serviceIcons[icon]
   const [open, setOpen] = useState(false)
   const panelId = useId()
   const contentRef = useRef<HTMLDivElement>(null)
