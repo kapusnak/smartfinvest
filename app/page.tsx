@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Mail, MapPin, Phone } from "lucide-react"
+import { FileWarning, Handshake, Mail, MapPin, Phone, ShieldCheck } from "lucide-react"
 
 import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
@@ -18,7 +18,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
 function getServices(yearsOfExperience: string) {
   return [
     {
-      icon: "/images/icons/dluh.png",
+      icon: FileWarning,
       title: "Vymáhání pohledávek",
       short: "Mimosoudní i soudní řešení pohledávek pro věřitele.",
       details: `Máme více než ${yearsOfExperience} zkušeností v oblasti správy a vymáhání pohledávek pro firmy i jednotlivce. Nabízíme mimosoudní řešení, soudní postupy i exekuce ve spolupráci s právníky. Naše práce je transparentní, efektivní a bez skrytých poplatků.`,
@@ -30,7 +30,7 @@ function getServices(yearsOfExperience: string) {
       },
     },
     {
-      icon: "/images/icons/financovani.png",
+      icon: Handshake,
       title: "Odkup pohledávek a portfolií",
       short: "Odkup jednotlivých pohledávek i celých portfolií.",
       details:
@@ -38,7 +38,7 @@ function getServices(yearsOfExperience: string) {
       partner: null as null | { href: string; label: string; logo: string; width: number },
     },
     {
-      icon: "/images/icons/dum.png",
+      icon: ShieldCheck,
       title: "Upomínkový servis a prevence",
       short: "Upomínky a poradenství proti vzniku dlužných částek.",
       details:
@@ -64,14 +64,14 @@ export default function HomePage() {
         >
           <div className="absolute inset-0 overflow-hidden">
             <Image
-              src="/images/hero.jpg"
+              src="/images/zach-m-Cr6bktsH8PM-unsplash.jpg"
               alt=""
               fill
               priority
               sizes="100vw"
-              className="object-cover object-[50%_90%]"
+              className="object-cover object-center"
             />
-            <div className="absolute inset-0 bg-black/25" aria-hidden />
+            <div className="absolute inset-0 bg-black/40" aria-hidden />
           </div>
           <Container className="relative z-10 py-12 md:py-16 lg:py-20">
             <div className="mx-auto max-w-[565px] text-center text-white">

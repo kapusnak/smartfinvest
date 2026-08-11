@@ -2,20 +2,20 @@
 
 import { useEffect, useId, useRef, useState, type KeyboardEvent, type MouseEvent } from "react"
 import Image from "next/image"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, type LucideIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
 type Partner = { href: string; label: string; logo: string; width: number }
 
 export function ServiceCard({
-  icon,
+  icon: Icon,
   title,
   short,
   details,
   partner,
 }: {
-  icon: string
+  icon: LucideIcon
   title: string
   short: string
   details: string
@@ -66,13 +66,7 @@ export function ServiceCard({
       )}
     >
       <div className="mx-auto flex size-24 items-center justify-center rounded-[28px] bg-[var(--color-primary)]/10">
-        <Image
-          src={icon}
-          alt=""
-          width={72}
-          height={72}
-          className="h-11 w-11 object-contain brightness-0 opacity-80"
-        />
+        <Icon className="h-11 w-11 text-[var(--color-primary)] opacity-90" strokeWidth={1.75} aria-hidden />
       </div>
 
       <h2 className="mt-5 font-[family-name:var(--font-instrument)] text-[1.35rem] font-semibold leading-snug text-[var(--color-contrast-2)]">

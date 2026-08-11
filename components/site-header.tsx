@@ -30,18 +30,15 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-black/[0.06] bg-white/95 backdrop-blur-sm">
       <Container className="flex h-16 items-center justify-between gap-4 md:h-[4.25rem]">
-        <Link href="/" className="flex shrink-0 items-center gap-2.5" onClick={() => setOpen(false)}>
+        <Link href="/" className="flex shrink-0 items-center" onClick={() => setOpen(false)}>
           <Image
-            src="/images/logo-circle.png"
+            src="/images/new-logo.png"
             alt="Smart Finvest s.r.o."
-            width={40}
-            height={40}
-            className="h-10 w-10 rounded-full object-cover"
+            width={160}
+            height={51}
+            className="h-9 w-auto sm:h-10"
             priority
           />
-          <span className="font-[family-name:var(--font-instrument)] text-base font-semibold tracking-[0.2px] text-[var(--color-foreground)] sm:text-lg">
-            Smart Finvest s.r.o.
-          </span>
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex" aria-label="Hlavní navigace">
