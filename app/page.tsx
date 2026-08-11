@@ -18,7 +18,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
 function getServices(yearsOfExperience: string) {
   return [
     {
-      icon: "fileWarning" as const,
+      icon: "shieldCheck" as const,
       title: "Vymáhání pohledávek",
       short: "Mimosoudní i soudní řešení pohledávek pro věřitele.",
       details: `Máme více než ${yearsOfExperience} zkušeností v oblasti správy a vymáhání pohledávek pro firmy i jednotlivce. Nabízíme mimosoudní řešení, soudní postupy i exekuce ve spolupráci s právníky. Naše práce je transparentní, efektivní a bez skrytých poplatků.`,
@@ -38,7 +38,7 @@ function getServices(yearsOfExperience: string) {
       partner: null as null | { href: string; label: string; logo: string; width: number },
     },
     {
-      icon: "shieldCheck" as const,
+      icon: "fileWarning" as const,
       title: "Upomínkový servis a prevence",
       short: "Upomínky a poradenství proti vzniku dlužných částek.",
       details:
@@ -174,11 +174,11 @@ export default function HomePage() {
 
                 <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
                   <Image
-                    src="/images/logo-circle.png"
+                    src="/images/new-logo.png"
                     alt="Smart Finvest s.r.o. — Finance, investice, pohledávky"
-                    width={148}
-                    height={148}
-                    className="h-[148px] w-[148px] shrink-0 rounded-full object-cover"
+                    width={220}
+                    height={71}
+                    className="h-14 w-auto shrink-0 sm:h-16"
                   />
                   <div>
                     <p className="text-lg font-semibold leading-snug text-[var(--color-foreground)] md:text-xl">
