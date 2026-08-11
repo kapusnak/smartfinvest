@@ -153,7 +153,14 @@ export default function HomePage() {
                 <h2 className="font-[family-name:var(--font-instrument)] text-2xl font-semibold text-[var(--color-foreground)] md:text-[2.1rem]">
                   O společnosti
                 </h2>
-                <p className="mt-4 text-body-foreground">
+                <Image
+                  src="/images/new-logo.png"
+                  alt="Smart Finvest s.r.o. — Finance, investice, pohledávky"
+                  width={220}
+                  height={71}
+                  className="mt-5 h-14 w-auto sm:h-16"
+                />
+                <p className="mt-5 text-body-foreground">
                   Smart Finvest s.r.o. je společnost, která vznikla jako přirozený vývoj
                   dlouholetého podnikání v oblasti financí, investic a správy pohledávek. Naše kořeny
                   sahají více než {yearsOfExperience} zpět, kdy jsme působili jako fyzická osoba
@@ -172,20 +179,11 @@ export default function HomePage() {
                   Kontaktujte nás
                 </h2>
 
-                <div className="mt-6 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
-                  <Image
-                    src="/images/new-logo.png"
-                    alt="Smart Finvest s.r.o. — Finance, investice, pohledávky"
-                    width={220}
-                    height={71}
-                    className="h-14 w-auto shrink-0 sm:h-16"
-                  />
-                  <div>
-                    <p className="text-lg font-semibold leading-snug text-[var(--color-foreground)] md:text-xl">
-                      Smart Finvest s.r.o.
-                    </p>
-                    <p className="mt-1 text-sm text-[var(--color-muted)] md:text-base">IČ: 23627000</p>
-                  </div>
+                <div className="mt-6">
+                  <p className="text-lg font-semibold leading-snug text-[var(--color-foreground)] md:text-xl">
+                    Smart Finvest s.r.o.
+                  </p>
+                  <p className="mt-1 text-sm text-[var(--color-muted)] md:text-base">IČ: 23627000</p>
                 </div>
 
                 <ul className="mt-6 space-y-4">

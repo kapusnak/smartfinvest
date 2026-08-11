@@ -44,7 +44,8 @@ export const metadata: Metadata = {
     description: siteDescription,
   },
   icons: {
-    icon: "/images/logo-circle.png",
+    icon: [{ url: "/images/favicon.png", type: "image/png" }],
+    apple: "/images/favicon.png",
   },
 }
 
