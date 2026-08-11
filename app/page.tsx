@@ -57,17 +57,20 @@ export default function HomePage() {
 
   return (
     <>
+      <link rel="preload" as="image" href="/images/hero-abstract.jpg" fetchPriority="high" />
       <main>
         <section
-          className="relative flex min-h-[min(50svh,392px)] items-center justify-center md:min-h-[min(56svh,504px)]"
+          className="relative flex min-h-[min(50svh,392px)] items-center justify-center bg-[#121417] md:min-h-[min(56svh,504px)]"
           aria-label="Úvod"
         >
-          <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden bg-[#121417]">
             <Image
-              src="/images/zach-m-Cr6bktsH8PM-unsplash.jpg"
+              src="/images/hero-abstract.jpg"
               alt=""
               fill
               priority
+              placeholder="blur"
+              blurDataURL="data:image/jpeg;base64,/9j/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAJABADASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQIEBf/EACQQAAECAwgDAAAAAAAAAAAAAAEABAIDEQUhMjVBUnGxcpHh/8QAFQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwDMdO6WndtIHKSY4IiFTqO/h9KV3mI8kZuMcjqJUH//2Q=="
               sizes="100vw"
               className="object-cover object-center"
             />
