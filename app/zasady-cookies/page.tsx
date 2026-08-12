@@ -49,9 +49,8 @@ export default function ZasadyCookiesPage() {
                   formuláře (např. uložení souhlasu s cookies v prohlížeči).
                 </li>
                 <li>
-                  <strong className="text-[var(--color-foreground)]">Analytické a marketingové</strong> – pouze pokud je v budoucnu
-                  zapnete a dáte souhlas (např. Google Analytics, reklamní systémy). V základním nastavení je web nasazen bez těchto
-                  skriptů.
+                  <strong className="text-[var(--color-foreground)]">Analytické</strong> – Google Analytics 4 (měření ID{" "}
+                  G-RMX82F6JBH) pro statistiky návštěvnosti a konverzí z formulářů. Skript se načítá na všech stránkách webu.
                 </li>
               </ul>
 
