@@ -131,9 +131,10 @@ export function ServiceCard({
                 src={partner.logo}
                 alt={partner.label}
                 width={partner.width}
-                height={80}
-                className="h-auto object-contain"
+                height={Math.round(partner.width * 0.7)}
+                className="h-auto max-h-20 w-auto object-contain"
                 style={{ width: partner.width }}
+                sizes={`${partner.width}px`}
               />
             </div>
           ) : null}

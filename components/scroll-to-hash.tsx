@@ -4,6 +4,8 @@ import { useEffect } from "react"
 import { usePathname } from "next/navigation"
 
 const SCROLL_HASH_KEY = "smartfinvest-scroll-hash"
+/** Sticky header (~h-16 / md:h-[4.25rem]) + small breathing room. */
+const HEADER_OFFSET_PX = 88
 
 /** Persist a section id so we can scroll after soft-navigating to another route. */
 export function stashScrollHash(hash: string) {
@@ -16,10 +18,18 @@ export function stashScrollHash(hash: string) {
   }
 }
 
-function scrollToId(id: string) {
+function headerOffsetPx(): number {
+  const header = document.querySelector<HTMLElement>("header")
+  if (!header) return HEADER_OFFSET_PX
+  return Math.ceil(header.getBoundingClientRect().height) + 12
+}
+
+/** Scroll so the section top sits just below the sticky header (not under it). */
+export function scrollToId(id: string, behavior: ScrollBehavior = "smooth"): boolean {
   const el = document.getElementById(id)
   if (!el) return false
-  el.scrollIntoView({ behavior: "smooth", block: "start" })
+  const top = el.getBoundingClientRect().top + window.scrollY - headerOffsetPx()
+  window.scrollTo({ top: Math.max(0, top), behavior })
   if (window.location.hash !== `#${id}`) {
     window.history.replaceState(null, "", `${window.location.pathname}#${id}`)
   }

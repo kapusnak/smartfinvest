@@ -46,7 +46,7 @@ const clientServices = [
     partner: {
       href: "https://docasnyvykup.cz/",
       label: "docasnyvykup.cz",
-      logo: "/images/partners/docasnyvykup.png",
+      logo: "/images/partners/docasnyvykup.webp",
       width: 140,
     },
   },
@@ -89,7 +89,7 @@ export default function ReseniProKlientyPage() {
 
         <section
           id="formular"
-          className="bg-[var(--color-section-tint)] py-12 md:py-16"
+          className="scroll-mt-[5.5rem] bg-[var(--color-section-tint)] py-12 md:py-16"
           aria-label="Nezávazná žádost"
         >
           <Container>

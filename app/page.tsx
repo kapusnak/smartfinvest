@@ -25,7 +25,7 @@ function getServices(yearsOfExperience: string) {
       partner: {
         href: "https://vymahanidluzniku.cz/",
         label: "vymahanidluzniku.cz",
-        logo: "/images/partners/inkasni-kancelar.png",
+        logo: "/images/partners/inkasni-kancelar.webp",
         width: 175,
       },
     },
@@ -101,7 +101,7 @@ export default function HomePage() {
 
         <section
           id="sluzby"
-          className="bg-[var(--color-surface-cream)]/40 py-12 md:py-16"
+          className="scroll-mt-[5.5rem] bg-[var(--color-surface-cream)]/40 py-12 md:py-16"
           aria-label="Služby"
         >
           <Container>
@@ -147,7 +147,7 @@ export default function HomePage() {
 
         <section
           id="kontakty"
-          className="bg-white py-12 md:py-16"
+          className="scroll-mt-[5.5rem] bg-white py-12 md:py-16"
           aria-label="O společnosti a kontakty"
         >
           <Container>

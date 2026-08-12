@@ -7,7 +7,7 @@ import { useState, type MouseEvent } from "react"
 import { Menu, X } from "lucide-react"
 
 import { Container } from "@/components/container"
-import { stashScrollHash } from "@/components/scroll-to-hash"
+import { stashScrollHash, scrollToId } from "@/components/scroll-to-hash"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
@@ -40,14 +40,12 @@ export function SiteHeader() {
     const { path, hash } = splitHashHref(href)
     if (!hash) return
 
-    // Same page: scroll immediately (Next Link often no-ops on hash-only changes).
+    // Same page: scroll after menu closes so header height is correct.
     if (pathname === path) {
       e.preventDefault()
-      const el = document.getElementById(hash)
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" })
-        window.history.pushState(null, "", `${path}#${hash}`)
-      }
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => scrollToId(hash))
+      })
       return
     }
 

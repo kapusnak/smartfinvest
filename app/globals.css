@@ -36,6 +36,8 @@
   }
   html {
     scroll-behavior: smooth;
+    /* Sticky header clearance for native / CSS hash scrolling */
+    scroll-padding-top: 5.5rem;
   }
   body {
     @apply bg-[var(--color-background)] text-[var(--color-foreground)] antialiased text-base leading-snug md:text-lg;

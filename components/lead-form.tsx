@@ -294,7 +294,7 @@ export function LeadForm() {
         <p className="text-body font-medium text-[var(--color-muted)]" id="lead-service-label">
           Typ služby
         </p>
-        <div className="flex flex-wrap gap-2" role="radiogroup" aria-labelledby="lead-service-label">
+        <div className="grid grid-cols-2 gap-2" role="radiogroup" aria-labelledby="lead-service-label">
           {clientServices.map((svc) => (
             <button
               key={svc.value}
@@ -303,7 +303,7 @@ export function LeadForm() {
               aria-checked={serviceType === svc.value}
               onClick={() => form.setValue("serviceType", svc.value)}
               className={cn(
-                "min-w-0 flex-1 px-2 py-2.5 text-center text-xs font-medium leading-tight transition-all sm:min-w-[calc(50%-0.25rem)] sm:px-3 sm:text-sm lg:flex-1",
+                "min-h-[44px] px-2.5 py-2.5 text-center text-[13px] font-medium leading-snug transition-all sm:px-3 sm:text-sm",
                 "rounded-xl border-2",
                 serviceType === svc.value
                   ? "border-[var(--color-primary)] bg-[var(--color-surface-cream)] text-[var(--color-primary)]"
