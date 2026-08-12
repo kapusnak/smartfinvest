@@ -3,6 +3,7 @@ import { Instrument_Sans, Jost } from "next/font/google"
 
 import { AppToaster } from "@/components/app-toaster"
 import { BottomChrome } from "@/components/bottom-chrome"
+import { ScrollToHash } from "@/components/scroll-to-hash"
 import { SiteHeader } from "@/components/site-header"
 import { getSiteUrlObject } from "@/lib/site-url"
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="cs" className={`${jost.variable} ${instrumentSans.variable}`}>
       <body className="min-h-screen font-sans">
         <SiteHeader />
+        <ScrollToHash />
         {children}
         <BottomChrome />
         <AppToaster />

@@ -2,11 +2,12 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useState } from "react"
+import { usePathname, useRouter } from "next/navigation"
+import { useState, type MouseEvent } from "react"
 import { Menu, X } from "lucide-react"
 
 import { Container } from "@/components/container"
+import { stashScrollHash } from "@/components/scroll-to-hash"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
@@ -15,8 +16,15 @@ const navLinks = [
   { href: "/#kontakty", label: "Kontakt" },
 ] as const
 
+function splitHashHref(href: string): { path: string; hash: string | null } {
+  const i = href.indexOf("#")
+  if (i === -1) return { path: href || "/", hash: null }
+  return { path: href.slice(0, i) || "/", hash: href.slice(i + 1) }
+}
+
 export function SiteHeader() {
   const pathname = usePathname()
+  const router = useRouter()
   const [open, setOpen] = useState(false)
 
   const linkClass = (href: string) =>
@@ -27,8 +35,31 @@ export function SiteHeader() {
         : "text-[var(--color-foreground)]",
     )
 
+  const onNavClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
+    setOpen(false)
+    const { path, hash } = splitHashHref(href)
+    if (!hash) return
+
+    // Same page: scroll immediately (Next Link often no-ops on hash-only changes).
+    if (pathname === path) {
+      e.preventDefault()
+      const el = document.getElementById(hash)
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" })
+        window.history.pushState(null, "", `${path}#${hash}`)
+      }
+      return
+    }
+
+    // Cross-page: stash hash so ScrollToHash runs after soft navigation.
+    e.preventDefault()
+    stashScrollHash(hash)
+    router.push(path)
+  }
+
   return (
-    <header className="sticky top-0 z-40 border-b border-black/[0.06] bg-white/95 backdrop-blur-sm">
+    // Above phone-popup backdrop (z-48) so nav stays clickable while the sheet is open.
+    <header className="sticky top-0 z-[60] border-b border-black/[0.06] bg-white/95 backdrop-blur-sm">
       <Container className="flex h-16 items-center justify-between gap-4 md:h-[4.25rem]">
         <Link href="/" className="flex shrink-0 items-center" onClick={() => setOpen(false)}>
           <Image
@@ -43,7 +74,12 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-7 md:flex" aria-label="Hlavní navigace">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className={linkClass(link.href)}>
+            <Link
+              key={link.href}
+              href={link.href}
+              className={linkClass(link.href)}
+              onClick={(e) => onNavClick(e, link.href)}
+            >
               {link.label}
             </Link>
           ))}
@@ -76,7 +112,7 @@ export function SiteHeader() {
                   "rounded-lg px-3 py-3 text-base font-medium transition-colors hover:bg-[var(--color-surface-cream)]",
                   linkClass(link.href),
                 )}
-                onClick={() => setOpen(false)}
+                onClick={(e) => onNavClick(e, link.href)}
               >
                 {link.label}
               </Link>
