@@ -19,7 +19,7 @@ function getServices(yearsOfExperience: string) {
   return [
     {
       icon: "shieldCheck" as const,
-      title: "Vymáhání pohledávek",
+      title: "Vymáhání a správa pohledávek",
       short: "Mimosoudní i soudní řešení pohledávek pro věřitele.",
       details: `Máme více než ${yearsOfExperience} zkušeností v oblasti správy a vymáhání pohledávek pro firmy i jednotlivce. Nabízíme mimosoudní řešení, soudní postupy i exekuce ve spolupráci s právníky. Naše práce je transparentní, efektivní a bez skrytých poplatků.`,
       partner: {
@@ -79,7 +79,7 @@ export default function HomePage() {
           <Container className="relative z-10 py-12 md:py-16 lg:py-20">
             <div className="mx-auto max-w-[565px] text-center text-white">
               <h1 className="font-[family-name:var(--font-instrument)] text-3xl font-semibold leading-tight tracking-[0.2px] sm:text-4xl md:text-[2.15rem] md:leading-snug">
-                Správa a vymáhání
+                Vymáhání a správa
                 <br />
                 pohledávek
               </h1>

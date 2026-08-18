@@ -11,7 +11,7 @@ import { stashScrollHash, scrollToId } from "@/components/scroll-to-hash"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
-  { href: "/#sluzby", label: "Vymáhání pohledávek" },
+  { href: "/#sluzby", label: "Vymáhání a správa pohledávek" },
   { href: "/reseni-pro-klienty", label: "Řešení pro klienty" },
   { href: "/#kontakty", label: "Kontakt" },
 ] as const

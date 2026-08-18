@@ -22,7 +22,7 @@ const instrumentSans = Instrument_Sans({
   display: "swap",
 })
 
-const siteTitle = "Smart Finvest s.r.o. | Vymáhání pohledávek a správa pohledávek"
+const siteTitle = "Vymáhání a správa pohledávek"
 const siteDescription =
   "Inkasní kancelář — správa a vymáhání pohledávek pro věřitele. Smart Finvest s.r.o., Zlín. Navazující řešení i pro klienty."
 
@@ -38,6 +38,7 @@ export const metadata: Metadata = {
     description: siteDescription,
     type: "website",
     locale: "cs_CZ",
+    siteName: siteTitle,
   },
   twitter: {
     card: "summary_large_image",
