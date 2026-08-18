@@ -35,6 +35,10 @@ export function PhonePopup() {
 
     const raf = requestAnimationFrame(() => {
       if (cancelled) return
+      if (pathname === "/zadost") {
+        setClosed(true)
+        return
+      }
       try {
         if (localStorage.getItem(POPUP_DISMISSED_KEY) === "1") {
           setClosed(true)
@@ -53,7 +57,7 @@ export function PhonePopup() {
       cancelAnimationFrame(raf)
       if (showTimer) clearTimeout(showTimer)
     }
-  }, [])
+  }, [pathname])
 
   /** Desktop: no slide animation — treat entrance as done immediately */
   useEffect(() => {

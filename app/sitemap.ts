@@ -16,6 +16,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
+    {
+      url: `${base}/zadost`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     { url: `${base}/ochrana-osobnich-udaju`, lastModified, changeFrequency: "yearly", priority: 0.4 },
     { url: `${base}/zasady-cookies`, lastModified, changeFrequency: "yearly", priority: 0.4 },
   ]

@@ -74,10 +74,9 @@ export function formatRangeLabelKc(value: number): string {
 }
 
 export const clientServices = [
-  { value: "refinancovani", label: "Refinancování" },
-  { value: "docasny-vykup", label: "Dočasný výkup" },
-  { value: "zajistene-uvery", label: "Zajištěné úvěry" },
-  { value: "financovani", label: "Financování" },
+  { value: "mam-nemovitost", label: "Mám nemovitost" },
+  { value: "mam-vozidlo", label: "Mám vozidlo" },
+  { value: "nemam-zajisteni", label: "Nemám nemovitost ani vozidlo" },
 ] as const
 
 /** @deprecated Use `clientServices` */
@@ -86,36 +85,22 @@ export const realEstateServices = clientServices
 export type ClientServiceValue = (typeof clientServices)[number]["value"]
 export type RealEstateServiceValue = ClientServiceValue
 
-export const DEFAULT_CLIENT_SERVICE: ClientServiceValue = "refinancovani"
+export const DEFAULT_CLIENT_SERVICE: ClientServiceValue = "mam-nemovitost"
 
-export const assetTypeOptions = [
-  { value: "Nemovitost", label: "Nemovitost" },
-  { value: "Vozidlo", label: "Vozidlo" },
-] as const
-
-export type AssetTypeValue = (typeof assetTypeOptions)[number]["value"]
-
-/** Services that ask for collateral type (nemovitost / vozidlo). */
-export const SERVICES_WITH_ASSET: ReadonlySet<ClientServiceValue> = new Set([
-  "zajistene-uvery",
-  "docasny-vykup",
-])
-
-/** Services that require property address (refinancing, or temporary buyout of real estate). */
-export function needsPropertyAddress(
-  serviceType: ClientServiceValue,
-  assetType: AssetTypeValue,
-): boolean {
-  if (serviceType === "refinancovani") return true
-  return serviceType === "docasny-vykup" && assetType === "Nemovitost"
+export function needsPropertyAddress(serviceType: ClientServiceValue): boolean {
+  return serviceType === "mam-nemovitost"
 }
 
-/** Temporary buyout of a vehicle — vehicle-specific fields. */
-export function isDocasnyVykupVozidlo(
+export function isVehicleSituation(serviceType: ClientServiceValue): boolean {
+  return serviceType === "mam-vozidlo"
+}
+
+export function assetTypeForService(
   serviceType: ClientServiceValue,
-  assetType: AssetTypeValue,
-): boolean {
-  return serviceType === "docasny-vykup" && assetType === "Vozidlo"
+): "Nemovitost" | "Vozidlo" | undefined {
+  if (serviceType === "mam-nemovitost") return "Nemovitost"
+  if (serviceType === "mam-vozidlo") return "Vozidlo"
+  return undefined
 }
 
 export const SOCIAL_PROOF_FALLBACK =
