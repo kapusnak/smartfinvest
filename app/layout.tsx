@@ -24,7 +24,7 @@ const instrumentSans = Instrument_Sans({
 
 const siteTitle = "Vymáhání a správa pohledávek"
 const siteDescription =
-  "Inkasní kancelář — správa a vymáhání pohledávek pro věřitele. Smart Finvest s.r.o., Zlín. Navazující řešení i pro klienty."
+  "Inkasní kancelář — vymáhání a správa pohledávek pro věřitele. Smart Finvest s.r.o., Zlín. Navazující řešení i pro klienty."
 
 export const metadata: Metadata = {
   metadataBase: getSiteUrlObject(),
