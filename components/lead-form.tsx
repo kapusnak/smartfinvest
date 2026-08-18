@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, Controller, useWatch, type FieldErrors } from "react-hook-form"
 import { z } from "zod"
@@ -19,19 +20,17 @@ import {
   DEFAULT_REAL_ESTATE_AMOUNT,
   REAL_ESTATE_AMOUNT_VALUES,
   REAL_ESTATE_RANGE,
-  SERVICES_WITH_ASSET,
   SOCIAL_PROOF_FALLBACK,
-  assetTypeOptions,
+  assetTypeForService,
   carAmountToIndex,
   clientServices,
   formatAmountKc,
   formatRangeLabelKc,
-  isDocasnyVykupVozidlo,
+  isVehicleSituation,
   needsPropertyAddress,
   realEstateAmountToIndex,
   snapToCarValue,
   snapToRealEstateValue,
-  type AssetTypeValue,
   type ClientServiceValue,
 } from "@/lib/lead-form-scales"
 import { PhoneDigitsInput } from "@/components/phone-digits-input"
@@ -45,13 +44,10 @@ const phoneInputWrapperClass =
   "h-12 w-full rounded-xl border border-black/20 bg-white px-4 text-base text-[var(--color-foreground)] shadow-sm outline-none transition-[box-shadow] focus-within:ring-2 focus-within:ring-[var(--color-primary)]"
 
 const serviceTypeEnum = z.enum([
-  "refinancovani",
-  "docasny-vykup",
-  "zajistene-uvery",
-  "financovani",
+  "mam-nemovitost",
+  "mam-vozidlo",
+  "nemam-zajisteni",
 ])
-
-const assetTypeEnum = z.enum(["Nemovitost", "Vozidlo"])
 
 const leadFormSchema = z
   .object({
@@ -59,7 +55,6 @@ const leadFormSchema = z
     email: z.string(),
     phoneDigits: z.string(),
     serviceType: serviceTypeEnum,
-    assetType: assetTypeEnum,
     amountCzk: z.number(),
     propertyAddress: z.string(),
     firstName: z.string(),
@@ -84,8 +79,7 @@ const leadFormSchema = z
     }
 
     const service = data.serviceType as ClientServiceValue
-    const asset = data.assetType as AssetTypeValue
-    const vehicleMode = isDocasnyVykupVozidlo(service, asset)
+    const vehicleMode = isVehicleSituation(service)
 
     if (vehicleMode) {
       if (data.firstName.trim().length < 1) {
@@ -131,7 +125,7 @@ const leadFormSchema = z
     if (data.name.trim().length < 2) {
       ctx.addIssue({ code: "custom", message: "Zadejte jméno.", path: ["name"] })
     }
-    if (needsPropertyAddress(service, asset) && data.propertyAddress.trim().length < 5) {
+    if (needsPropertyAddress(service) && data.propertyAddress.trim().length < 5) {
       ctx.addIssue({
         code: "custom",
         message: "Zadejte adresu nemovitosti (ulice, č.p., město).",
@@ -158,13 +152,26 @@ function emptyVozidloFields() {
   }
 }
 
+const SITUATION_FROM_QUERY: Record<string, ClientServiceValue> = {
+  "mam-nemovitost": "mam-nemovitost",
+  nemovitost: "mam-nemovitost",
+  "mam-vozidlo": "mam-vozidlo",
+  vozidlo: "mam-vozidlo",
+  "nemam-zajisteni": "nemam-zajisteni",
+  bez: "nemam-zajisteni",
+}
+
+function situationFromSearchParam(raw: string | null): ClientServiceValue | undefined {
+  if (!raw) return undefined
+  return SITUATION_FROM_QUERY[raw.trim().toLowerCase()]
+}
+
 function defaultFormValues(overrides?: Partial<LeadFormValues>): LeadFormValues {
   return {
     name: "",
     email: "",
     phoneDigits: "",
     serviceType: DEFAULT_CLIENT_SERVICE,
-    assetType: "Nemovitost",
     amountCzk: snapToRealEstateValue(DEFAULT_REAL_ESTATE_AMOUNT),
     propertyAddress: "",
     ...emptyVozidloFields(),
@@ -173,11 +180,14 @@ function defaultFormValues(overrides?: Partial<LeadFormValues>): LeadFormValues 
 }
 
 export function LeadForm() {
+  const searchParams = useSearchParams()
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
+  const initialService =
+    situationFromSearchParam(searchParams.get("typ")) ?? DEFAULT_CLIENT_SERVICE
 
   const form = useForm<LeadFormValues>({
     resolver: zodResolver(leadFormSchema),
-    defaultValues: defaultFormValues(),
+    defaultValues: defaultFormValues({ serviceType: initialService }),
     mode: "onSubmit",
     reValidateMode: "onSubmit",
   })
@@ -185,13 +195,10 @@ export function LeadForm() {
   const amountCzk = useWatch({ control: form.control, name: "amountCzk" })
   const vehicleAmountCzk = useWatch({ control: form.control, name: "vehicleAmountCzk" })
   const serviceType = useWatch({ control: form.control, name: "serviceType" })
-  const assetType = useWatch({ control: form.control, name: "assetType" })
 
   const service = serviceType as ClientServiceValue
-  const asset = assetType as AssetTypeValue
-  const showAssetType = SERVICES_WITH_ASSET.has(service)
-  const showPropertyAddress = needsPropertyAddress(service, asset)
-  const vehicleMode = isDocasnyVykupVozidlo(service, asset)
+  const showPropertyAddress = needsPropertyAddress(service)
+  const vehicleMode = isVehicleSituation(service)
 
   const maxIdx = REAL_ESTATE_AMOUNT_VALUES.length - 1
   const valueIndex = realEstateAmountToIndex(amountCzk)
@@ -204,8 +211,7 @@ export function LeadForm() {
     if (!phone) return
     setStatus("sending")
     try {
-      const needsAsset = SERVICES_WITH_ASSET.has(values.serviceType)
-      const isVehicle = isDocasnyVykupVozidlo(values.serviceType, values.assetType)
+      const isVehicle = isVehicleSituation(values.serviceType)
       const serviceLabel =
         clientServices.find((s) => s.value === values.serviceType)?.label ?? values.serviceType
 
@@ -213,12 +219,11 @@ export function LeadForm() {
       let amount: number
       let serviceTypePayload: string
       let propertyAddress: string | undefined
-      let assetTypePayload: string | undefined
+      const assetTypePayload = assetTypeForService(values.serviceType)
 
       if (isVehicle) {
         name = `${values.firstName.trim()} ${values.lastName.trim()}`.trim()
         amount = snapToCarValue(values.vehicleAmountCzk)
-        assetTypePayload = "Vozidlo"
         const vinPart = values.vin.trim() ? `, VIN ${values.vin.trim()}` : ""
         const contractPart = values.contractDurationMonths.trim()
           ? `, trvání smlouvy ${values.contractDurationMonths.trim()} měs.`
@@ -228,8 +233,7 @@ export function LeadForm() {
         name = values.name.trim()
         amount = snapToRealEstateValue(values.amountCzk)
         serviceTypePayload = serviceLabel
-        if (needsAsset) assetTypePayload = values.assetType
-        if (needsPropertyAddress(values.serviceType, values.assetType)) {
+        if (needsPropertyAddress(values.serviceType)) {
           propertyAddress = values.propertyAddress.trim()
         }
       }
@@ -254,6 +258,7 @@ export function LeadForm() {
         defaultFormValues({
           email: values.email,
           phoneDigits: values.phoneDigits,
+          serviceType: values.serviceType,
         }),
       )
     } catch (e) {
@@ -292,7 +297,7 @@ export function LeadForm() {
     <form onSubmit={form.handleSubmit(onSubmit, onInvalid)} className="mx-auto w-full space-y-6">
       <div className="space-y-2">
         <p className="text-body font-medium text-[var(--color-muted)]" id="lead-service-label">
-          Typ služby
+          Vaše situace
         </p>
         <div className="grid grid-cols-2 gap-2" role="radiogroup" aria-labelledby="lead-service-label">
           {clientServices.map((svc) => (
@@ -305,6 +310,7 @@ export function LeadForm() {
               className={cn(
                 "min-h-[44px] px-2.5 py-2.5 text-center text-[13px] font-medium leading-snug transition-all sm:px-3 sm:text-sm",
                 "rounded-xl border-2",
+                svc.value === "nemam-zajisteni" ? "col-span-2" : null,
                 serviceType === svc.value
                   ? "border-[var(--color-primary)] bg-[var(--color-surface-cream)] text-[var(--color-primary)]"
                   : "border-transparent bg-[var(--color-surface-muted)] text-[var(--color-muted)] hover:border-[var(--color-primary)]/30",
@@ -315,34 +321,6 @@ export function LeadForm() {
           ))}
         </div>
       </div>
-
-      {showAssetType ? (
-        <div className="space-y-2">
-          <p className="text-body font-medium text-[var(--color-muted)]" id="lead-asset-label">
-            Typ zajištění
-          </p>
-          <div className="flex flex-wrap gap-2" role="radiogroup" aria-labelledby="lead-asset-label">
-            {assetTypeOptions.map((option) => (
-              <button
-                key={option.value}
-                type="button"
-                role="radio"
-                aria-checked={assetType === option.value}
-                onClick={() => form.setValue("assetType", option.value as AssetTypeValue)}
-                className={cn(
-                  "min-w-0 flex-1 px-3 py-2.5 text-center text-sm font-medium leading-tight transition-all",
-                  "rounded-xl border-2",
-                  assetType === option.value
-                    ? "border-[var(--color-primary)] bg-[var(--color-surface-cream)] text-[var(--color-primary)]"
-                    : "border-transparent bg-[var(--color-surface-muted)] text-[var(--color-muted)] hover:border-[var(--color-primary)]/30",
-                )}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      ) : null}
 
       {vehicleMode ? (
         <>
