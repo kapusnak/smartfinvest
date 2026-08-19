@@ -166,16 +166,13 @@ export default function HomePage() {
                   className="mt-5 h-14 w-auto sm:h-16"
                 />
                 <p className="mt-5 text-body-foreground">
-                  Smart Finvest s.r.o. je společnost, která vznikla jako přirozený vývoj
-                  dlouholetého podnikání v oblasti financí, investic a správy pohledávek. Naše kořeny
-                  sahají více než {yearsOfExperience} zpět, kdy jsme působili jako fyzická osoba
-                  podnikající v tomto oboru.
+                  Smart Finvest s.r.o. navazuje na více než 26 let zkušeností v oblasti vymáhání
+                  a správy pohledávek, financování a investic.
                 </p>
                 <p className="mt-4 text-body-foreground">
-                  Máme rozsáhlé zkušenosti s řešením a správou pohledávek. Díky tomu dokážeme
-                  věřitelům nabídnout komplexní služby inkasní kanceláře. Pro klienty, kteří chtějí
-                  svou situaci aktivně řešit, nabízíme jako navazující možnost i refinancování
-                  úvěrů a zástav nemovitostí, konsolidaci závazků i individuální financování.
+                  Věřitelům poskytujeme komplexní služby inkasní kanceláře. Klientům, kteří chtějí
+                  svou finanční situaci aktivně řešit, nabízíme navazující možnosti refinancování,
+                  konsolidace závazků a individuálního financování.
                 </p>
               </div>
 
