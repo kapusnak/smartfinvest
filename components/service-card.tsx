@@ -125,7 +125,7 @@ export function ServiceCard({
                 rel="noopener noreferrer"
                 className="text-sm text-[var(--color-primary)] underline-offset-2 hover:underline"
               >
-                Partner: {partner.label}
+                {partner.label}
               </a>
               <Image
                 src={partner.logo}
