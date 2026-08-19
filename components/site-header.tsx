@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { useState, type MouseEvent } from "react"
 import { Menu, X } from "lucide-react"
 
@@ -24,7 +24,6 @@ function splitHashHref(href: string): { path: string; hash: string | null } {
 
 export function SiteHeader() {
   const pathname = usePathname()
-  const router = useRouter()
   const [open, setOpen] = useState(false)
 
   const linkClass = (href: string) =>
@@ -50,9 +49,9 @@ export function SiteHeader() {
     }
 
     // Cross-page: stash hash so ScrollToHash runs after soft navigation.
-    e.preventDefault()
+    // Do NOT prevent default — let the <Link> handle the navigation itself.
+    // Stash hash before the click propagates so ScrollToHash can read it on arrival.
     stashScrollHash(hash)
-    router.push(path)
   }
 
   return (
