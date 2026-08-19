@@ -4,6 +4,7 @@ import { Mail, MapPin, Phone } from "lucide-react"
 
 import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
+import { PhonePopup } from "@/components/phone-popup"
 import { ServiceCard } from "@/components/service-card"
 import { formatYearsOfExperience } from "@/lib/years-of-experience"
 
@@ -58,6 +59,7 @@ export default function HomePage() {
   return (
     <>
       <link rel="preload" as="image" href="/images/hero-abstract.jpg" fetchPriority="high" />
+      <PhonePopup />
       <main>
         <section
           className="relative flex min-h-[min(50svh,392px)] items-center justify-center bg-[#121417] md:min-h-[min(56svh,504px)]"
