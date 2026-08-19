@@ -14,41 +14,33 @@ export const metadata: Metadata = {
 
 const clientServices = [
   {
-    icon: "landmark" as const,
-    title: "Financování na míru",
-    short: "Zajistíme kapitál pro Vaše plány i rozvoj podnikání",
-    details:
-      "Klientům pomáháme zajistit individuální financování — ať už jde o refinancování závazků, rozvoj podnikání nebo individuální finanční potřeby. Zajišťujeme financování od menších částek až po vysoké objemy určené pro náročné projekty. Naším cílem je vytvářet oboustranně výhodná řešení, která přinesou stabilitu klientovi a jistotu investorovi.",
-    partner: null as null | { href: string; label: string; logo: string; width: number },
-  },
-  {
     icon: "refreshCw" as const,
-    title: "Refinancování na míru",
+    title: "Refinancování nemovitostí",
     short: "Lepší podmínky pro vaše závazky a zástavy nemovitostí.",
     details:
       "Pomáháme klientům získat výhodnější podmínky u závazků a zástav zajištěných nemovitostí. Spolupracujeme s finančními institucemi i soukromými investory, abychom dosáhli nižších splátek, prodloužení splatnosti nebo celkově udržitelnějšího nastavení financování.",
-    partner: null,
+    partner: null as null | { href: string; label: string; logo: string; width: number },
   },
   {
     icon: "badgePercent" as const,
     title: "Zajištěné úvěry",
     short: "Prostředky se zajištěním nemovitosti či vozidla.",
     details:
-      "Součástí naší nabídky je využití zástavy majetku — prostředky se zajištěním nemovitosti či vozidla. Pomáháme klientům najít řešení, které zohledňuje jejich situaci a dostupné zajištění.",
-    partner: null,
-  },
-  {
-    icon: "car" as const,
-    title: "Dočasný výkup",
-    short: "Dočasný výkup vozidel s možností zpětného odkupu.",
-    details:
-      "Součástí naší nabídky je také dočasný výkup vozidel s možností zpětného odkupu. Cílem je nabídnout klientům cestu, jak získat prostředky a zároveň si zachovat možnost vozidlo později odkoupit zpět.",
+      "Součástí naší nabídky je využití zástavy majetku — prostředky se zajištěním nemovitosti či vozidla. Pomáháme klientům najít řešení, které zohledňuje jejich situaci a dostupné zajištění. Nabízíme také dočasný výkup vozidel s možností zpětného odkupu — klientům tak umožňujeme získat prostředky a zároveň si zachovat možnost vozidlo později odkoupit zpět.",
     partner: {
       href: "https://docasnyvykup.cz/",
       label: "docasnyvykup.cz",
       logo: "/images/partners/docasnyvykup.webp",
       width: 140,
     },
+  },
+  {
+    icon: "landmark" as const,
+    title: "Financování na míru",
+    short: "Zajistíme kapitál pro Vaše plány i rozvoj podnikání",
+    details:
+      "Klientům pomáháme zajistit individuální financování — ať už jde o refinancování závazků, rozvoj podnikání nebo individuální finanční potřeby. Zajišťujeme financování od menších částek až po vysoké objemy určené pro náročné projekty. Naším cílem je vytvářet oboustranně výhodná řešení, která přinesou stabilitu klientovi a jistotu investorovi.",
+    partner: null,
   },
 ]
 
@@ -72,7 +64,7 @@ export default function ReseniProKlientyPage() {
               </p>
             </div>
 
-            <div className="mt-10 grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            <div className="mt-10 grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
               {clientServices.map((item) => (
                 <ServiceCard
                   key={item.title}
