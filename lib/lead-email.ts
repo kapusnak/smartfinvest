@@ -221,7 +221,7 @@ function buildClientHtml(fields: {
   <div style="margin-top: 30px; padding: 15px; border-left: 4px solid ${ACCENT}; background-color: #f0faf7; border-radius: 4px;">
     <h3 style="color: ${ACCENT}; margin-top: 0; font-size: 17px;">CO BUDE DÁL?</h3>
     <p>Vaši poptávku zpracujeme a ozveme se Vám s návrhem dalšího postupu — ať už jde o refinancování, řešení pohledávek, nebo financování na míru.</p>
-    <p style="margin: 10px 0 0 0; line-height: 1.5; font-weight: normal;">Obvykle se Vám ozveme do 1 pracovního dne (Po–Pá: 8:00 – 17:00).</p>
+    <p style="margin: 10px 0 0 0; line-height: 1.5; font-weight: normal;">Obvykle se Vám ozveme během jedné hodiny.</p>
   </div>
   <div style="margin-top: 30px; padding-top: 15px; border-top: 1px dashed #cccccc;">
     <h4 style="margin-bottom: 10px; font-size: 15px; color: ${ACCENT};">Spěcháte, nebo máte dotazy?</h4>
@@ -298,7 +298,7 @@ export function buildLeadEmails(params: LeadPayload & { ip: string }): BuiltLead
     `Typ služby: ${serviceType}`,
     `Požadovaná částka: ${amount}`,
     "",
-    "Obvykle se Vám ozveme do 1 pracovního dne (Po–Pá: 8:00 – 17:00).",
+    "Obvykle se Vám ozveme během jedné hodiny.",
     "",
     `Telefon: ${phonesText}`,
     `E-mail: ${SITE.contactEmail}`,
