@@ -10,6 +10,7 @@ scripts/extract-wp-pages.py
 node_modules/
 .next/
 out/
+*.tsbuildinfo
 
 # environment
 .env
