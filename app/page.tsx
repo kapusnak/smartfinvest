@@ -6,6 +6,7 @@ import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
 import { PhonePopup } from "@/components/phone-popup"
 import { ServiceCard } from "@/components/service-card"
+import { SITE_PHONES } from "@/lib/site-contact"
 import { formatYearsOfExperience } from "@/lib/years-of-experience"
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -222,41 +223,39 @@ export default function HomePage() {
                       </a>
                     </div>
                   </li>
-                  <li className="flex gap-3">
-                    <span
-                      className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
-                      aria-hidden
-                    >
-                      <Phone className="h-[1.125rem] w-[1.125rem]" strokeWidth={2.25} />
-                    </span>
-                    <div>
-                      <p className="text-sm font-medium text-[var(--color-muted)]">Telefon</p>
-                      <a
-                        href="tel:+420776680720"
-                        className="mt-0.5 inline-block text-body-foreground transition-colors hover:text-[var(--color-primary)]"
+                  {SITE_PHONES.map((phone) => (
+                    <li key={phone.tel} className="flex gap-3">
+                      <span
+                        className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
+                        aria-hidden
                       >
-                        +420 776 680 720
-                      </a>
-                    </div>
-                  </li>
+                        <Phone className="h-[1.125rem] w-[1.125rem]" strokeWidth={2.25} />
+                      </span>
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium text-[var(--color-muted)]">{phone.label}</p>
+                        <a
+                          href={`tel:${phone.tel}`}
+                          className="mt-0.5 inline-block text-body-foreground transition-colors hover:text-[var(--color-primary)]"
+                          aria-label={`Zavolat ${phone.label}: ${phone.display}`}
+                        >
+                          {phone.display}
+                        </a>
+                        <a
+                          href={phone.whatsappHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Napsat na WhatsApp — ${phone.label}: ${phone.display}`}
+                          className="mt-2 inline-flex max-w-full items-center gap-2.5 rounded-xl border border-[#25D366]/45 bg-transparent px-3 py-2.5 transition-colors hover:border-[#25D366] hover:bg-[#25D366]/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/40 focus-visible:ring-offset-2"
+                        >
+                          <WhatsAppIcon className="h-5 w-5 shrink-0 text-[#25D366]" />
+                          <span className="min-w-0 text-sm font-semibold leading-snug text-[var(--color-foreground)]">
+                            Napište na WhatsApp
+                          </span>
+                        </a>
+                      </div>
+                    </li>
+                  ))}
                 </ul>
-
-                <a
-                  href="https://wa.me/420776680720"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex max-w-full items-center gap-3 rounded-xl border border-[#25D366]/45 bg-transparent px-4 py-3 transition-colors hover:border-[#25D366] hover:bg-[#25D366]/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]/40 focus-visible:ring-offset-2"
-                >
-                  <WhatsAppIcon className="h-7 w-7 shrink-0 text-[#25D366]" />
-                  <span className="min-w-0">
-                    <span className="block text-sm font-semibold leading-snug text-[var(--color-foreground)] sm:text-base">
-                      Napište nám na WhatsApp
-                    </span>
-                    <span className="mt-0.5 block text-xs leading-snug text-[var(--color-muted)] sm:text-sm">
-                      Rychlá zpráva — odpovíme co nejdříve
-                    </span>
-                  </span>
-                </a>
               </div>
             </div>
           </Container>

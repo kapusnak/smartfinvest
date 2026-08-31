@@ -1,3 +1,5 @@
+import { SITE_PHONES } from "@/lib/site-contact"
+
 export type LeadSource = "calculator" | "popup" | "cta"
 
 export type LeadPayload = {
@@ -18,9 +20,7 @@ const SITE = {
   brandName: "Smart Finvest s.r.o.",
   contactEmail: "info@smartfinvest.cz",
   signOff: "Váš tým Smart Finvest s.r.o.",
-  phones: [
-    { tel: "+420776680720", display: "+420 776 680 720" },
-  ],
+  phones: SITE_PHONES,
 } as const
 
 const ACCENT = "#299583"
@@ -189,7 +189,7 @@ function buildClientHtml(fields: {
   const phoneLines = SITE.phones
     .map(
       (p) =>
-        `<a style="color: ${ACCENT}; text-decoration: none;" href="tel:${escapeHtml(p.tel)}">${escapeHtml(p.display)}</a>`,
+        `${escapeHtml(p.label)}: <a style="color: ${ACCENT}; text-decoration: none;" href="tel:${escapeHtml(p.tel)}">${escapeHtml(p.display)}</a>`,
     )
     .join("<br>\n      ")
   const contactEmail = SITE.contactEmail
@@ -287,7 +287,7 @@ export function buildLeadEmails(params: LeadPayload & { ip: string }): BuiltLead
 
   const clientNameForBody = callback ? PLACEHOLDER : name
   const clientSubject = `Potvrzení přijetí poptávky – ${SITE.brandName}`
-  const phonesText = SITE.phones.map((p) => p.display).join(" / ")
+  const phoneLinesText = SITE.phones.map((p) => `${p.label}: ${p.display}`).join("\n")
   const clientText = [
     "Dobrý den, děkujeme za Vaši poptávku!",
     "",
@@ -299,7 +299,8 @@ export function buildLeadEmails(params: LeadPayload & { ip: string }): BuiltLead
     "",
     "Obvykle se Vám ozveme během jedné hodiny.",
     "",
-    `Telefon: ${phonesText}`,
+    "Telefon:",
+    phoneLinesText,
     `E-mail: ${SITE.contactEmail}`,
     "",
     "S pozdravem,",
