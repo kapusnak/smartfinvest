@@ -3,6 +3,7 @@ import Link from "next/link"
 
 import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
+import { SITE_PHONES } from "@/lib/site-contact"
 
 export const metadata: Metadata = {
   title: "Zásady cookies",
@@ -78,9 +79,18 @@ export default function ZasadyCookiesPage() {
                   info@smartfinvest.cz
                 </a>
                 , tel.{" "}
-                <a href="tel:+420776680720" className="text-[var(--color-primary)] underline-offset-2 hover:underline">
-                  +420 776 680 720
-                </a>
+                {SITE_PHONES.map((phone, index) => (
+                  <span key={phone.tel}>
+                    {index > 0 ? "; " : null}
+                    {phone.label}:{" "}
+                    <a
+                      href={`tel:${phone.tel}`}
+                      className="text-[var(--color-primary)] underline-offset-2 hover:underline"
+                    >
+                      {phone.display}
+                    </a>
+                  </span>
+                ))}
                 .
               </p>
             </article>

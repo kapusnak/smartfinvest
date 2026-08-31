@@ -3,6 +3,7 @@ import Link from "next/link"
 
 import { Container } from "@/components/container"
 import { Footer } from "@/components/footer"
+import { SITE_PHONES } from "@/lib/site-contact"
 
 export const metadata: Metadata = {
   title: "Ochrana osobních údajů",
@@ -194,11 +195,21 @@ export default function OchranaOsobnichUdajuPage() {
                     info@smartfinvest.cz
                   </a>
                   <br />
-                  <strong className="text-[var(--color-foreground)]">Telefon:</strong>{" "}
-                  <a href="tel:+420776680720" className="text-[var(--color-primary)] underline-offset-2 hover:underline">
-                    +420 776 680 720
-                  </a>
+                  <strong className="text-[var(--color-foreground)]">Telefon:</strong>
                 </p>
+                <ul className="mt-2 space-y-1">
+                  {SITE_PHONES.map((phone) => (
+                    <li key={phone.tel}>
+                      {phone.label}:{" "}
+                      <a
+                        href={`tel:${phone.tel}`}
+                        className="text-[var(--color-primary)] underline-offset-2 hover:underline"
+                      >
+                        {phone.display}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
                 <p className="mt-8">
                   <Link href="/" className="text-[var(--color-primary)] font-medium underline-offset-2 hover:underline">
                     Zpět na úvod
