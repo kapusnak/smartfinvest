@@ -235,7 +235,7 @@ export default function HomePage() {
                         <p className="text-sm font-medium text-[var(--color-muted)]">{phone.label}</p>
                         <a
                           href={`tel:${phone.tel}`}
-                          className="mt-0.5 inline-block text-body-foreground transition-colors hover:text-[var(--color-primary)]"
+                          className="mt-0.5 block w-fit text-body-foreground transition-colors hover:text-[var(--color-primary)]"
                           aria-label={`Zavolat ${phone.label}: ${phone.display}`}
                         >
                           {phone.display}
