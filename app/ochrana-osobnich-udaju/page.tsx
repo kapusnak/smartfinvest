@@ -28,7 +28,7 @@ export default function OchranaOsobnichUdajuPage() {
             <p className="mx-auto mt-3 max-w-2xl text-center text-body-inverse">
               Smart Finvest s.r.o., IČ 23627000, Podvesná VII/6192, 760 01 Zlín
             </p>
-            <p className="mt-2 text-center text-sm text-white/80">Aktualizováno: 8. 10. 2026</p>
+            <p className="mt-2 text-center text-sm text-white/80">Aktualizováno: 21. 10. 2026</p>
           </Container>
         </section>
 
@@ -154,9 +154,32 @@ export default function OchranaOsobnichUdajuPage() {
               <section>
                 <h2 className="text-lg font-bold text-[var(--color-foreground)] md:text-xl">5. Předání osobních údajů třetím stranám</h2>
                 <p className="mt-3">
-                  Vaše osobní údaje <strong className="text-[var(--color-foreground)]">nepředáváme žádným třetím stranám</strong>.
-                  Zůstávají pouze u nás pro účely uvedené v tomto dokumentu, s výjimkou případů, kdy nám takovou povinnost ukládá
-                  zákon (např. na vyžádání orgánů činných v trestním řízení).
+                  Osobní údaje{" "}
+                  <strong className="text-[var(--color-foreground)]">
+                    nepředáváme třetím stranám za účelem jejich vlastního využití
+                  </strong>, s výjimkou případů, kdy nám takovou povinnost ukládá zákon.
+                </p>
+                <p className="mt-3">Osobní údaje však mohou být zpřístupněny těmto kategoriím příjemců:</p>
+                <ul className="mt-3 list-disc space-y-1 pl-6">
+                  <li>
+                    poskytovatelům poštovních a doručovacích služeb, zejména Česká pošta, s.p., v rozsahu jméno, příjmení a adresa,
+                    výhradně za účelem doručení zásilek s nabídkou našich služeb (viz oddíl Poštovní nabídky a veřejně dostupné
+                    zdroje),
+                  </li>
+                  <li>
+                    poskytovatelům hostingu, provozu webu a e-mailových služeb, kteří pro nás údaje zpracovávají jako zpracovatelé
+                    na základě smlouvy a podle našich pokynů,
+                  </li>
+                  <li>
+                    poskytovatelům analytických a reklamních nástrojů v rozsahu uvedeném na této stránce a v{" "}
+                    <Link href="/zasady-cookies" className="text-[var(--color-primary)] underline-offset-2 hover:underline">
+                      Zásadách cookies
+                    </Link>.
+                  </li>
+                </ul>
+                <p className="mt-3">
+                  Osobní údaje <strong className="text-[var(--color-foreground)]">nepředáváme do třetích zemí mimo EU/EHP</strong>,
+                  s výjimkou případů, kdy je předání zajištěno v souladu s kapitolou V GDPR.
                 </p>
               </section>
 
