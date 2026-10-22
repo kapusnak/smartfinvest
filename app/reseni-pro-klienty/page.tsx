@@ -40,7 +40,12 @@ const clientServices = [
     short: "Zajistíme kapitál pro Vaše plány i rozvoj podnikání",
     details:
       "Klientům pomáháme zajistit individuální financování — ať už jde o refinancování závazků, rozvoj podnikání nebo individuální finanční potřeby. Zajišťujeme financování od menších částek až po vysoké objemy určené pro náročné projekty. Naším cílem je vytvářet oboustranně výhodná řešení, která přinesou stabilitu klientovi a jistotu investorovi.",
-    partner: null,
+    partner: {
+      href: "https://penizebezzastavy.cz/",
+      label: "penizebezzastavy.cz",
+      logo: "/images/partners/penizebezzastavy.webp",
+      width: 140,
+    },
   },
 ]
 
